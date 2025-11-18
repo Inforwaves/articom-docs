@@ -1,0 +1,254 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- UNIVERSAL PREAMBLE BLOCK ---
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage{fontspec}
+
+\usepackage[english, bidi=basic, provide=*]{babel}
+
+\babelprovide[import, onchar=ids fonts]{english}
+
+% Set default/Latin font to Sans Serif in the main (rm) slot
+\babelfont{rm}{Noto Sans}
+% --- END UNIVERSAL PREAMBLE BLOCK ---
+
+\usepackage{parskip} % For space between paragraphs instead of indent
+\usepackage{booktabs} % For tables
+\usepackage[T1]{fontenc} % For proper character encoding
+
+% For custom list formatting (definitions)
+\usepackage{enumitem}
+\setlist[description]{
+    font=\normalfont\bfseries,
+    leftmargin=1.5cm,
+    labelindent=0cm
+}
+
+% Section formatting to match document
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Custom formatting for appendices
+\usepackage[title]{appendix}
+\titleformat{\section}[display]
+  {\normalfont\Large\bfseries}
+  {EXHIBIT \Alph{section}:}
+  {0pt}
+  {\MakeUppercase}
+
+% Must be last
+\usepackage{hyperref} 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Master Service Agreement},
+    pdfpagemode=FullScreen,
+}
+
+\title{Master Service Agreement}
+\author{} % No author
+\date{} % No date
+
+\begin{document}
+
+\maketitle
+
+THIS MASTER SERVICE AGREEMENT (``Agreement'') is entered into as of the Effective Date set forth on the initial Order Form (the ``Effective Date'') by and between:
+
+\textbf{Inforwaves Private Limited (PV00225750)}, a company registered in Sri Lanka with its principal place of business at 7/E, Jayanthi Place, Gangarama Road, Werahara, Boralesgamuwa, Sri Lanka, (provider of the ``Articom'' product, which is registered in the USA at 2261 Market Street STE 85832, San Francisco, CA 94114) (``Articom'').
+
+AND
+
+\textbf{DAVID PIERIS HOLDINGS (PRIVATE) LIMITED}, a Company duly incorporated under the laws of Sri Lanka bearing the registration No. PB270V and having its registered office at No. 120, 120A, Pannipitiya Road, Battaramulla (``Customer'').
+
+(``Articom'' and ``Customer'' are each a ``Party'' and collectively the ``Parties'').
+
+\textbf{WHEREAS}, Articom provides an agentic AI platform and related professional services; and
+
+\textbf{WHEREAS}, Customer desires to procure such services from Articom under the terms and conditions of this Agreement.
+
+\textbf{NOW, THEREFORE}, in consideration of the mutual covenants contained herein, the Parties agree as follows:
+
+\section{Definitions}
+\begin{description}
+    \item[1.1 ``Affiliate''] means any entity that directly or indirectly controls, is controlled by, or is under common control with a Party.
+    \item[1.2 ``Agent'' or ``Assistant''] means a specific instance of the Articom AI software configured by or for Customer to perform tasks.
+    \item[1.3 ``Articom Platform''] means the agentic AI software-as-a-service platform, including its APIs, tools, and documentation, provided by Articom.
+    \item[1.4 ``Confidential Information''] has the meaning set forth in Section 7.
+    \item[1.5 ``Customer Data''] means all data, information, content, and materials provided or made available by Customer to Articom for use with the Services, including End User Data.
+    \item[1.6 ``Documentation''] means the official user manuals, guides, and specifications for the Services provided by Articom.
+    \item[1.7 ``End User''] means any individual who interacts with an Agent, including Customer's employees, customers, or the general public.
+    \item[1.8 ``Order Form''] means a written document (including a ``Quotation'' or ``Proposal'') executed by both Parties that specifies the Services procured by Customer, including pricing, term, and any other transaction-specific details. Each Order Form is incorporated into this Agreement by reference.
+    \item[1.9 ``Services''] means the specific services provided by Articom to Customer as set forth in an Order Form, which may include access to the Articom Platform (the ``SaaS Services''), Professional Services, or Standalone Deployments.
+    \item[1.10 ``Professional Services''] means any custom development, integration, training, or consulting services provided by Articom as described in an Order Form or Statement of Work.
+    \item[1.11 ``Standalone Deployment''] means a license to deploy the Articom software on Customer's own infrastructure, as specified in an Order Form.
+    \item[1.12 ``Service Level Agreement'' or ``SLA''] means the service level commitments for the SaaS Services, attached hereto as Exhibit B.
+    \item[1.13 ``Statement of Work'' or ``SOW''] means a document detailing the scope, deliverables, and fees for Professional Services, which, upon execution, is incorporated into this Agreement.
+    \item[1.14 ``Term''] has the meaning set forth in Section 10.1.
+\end{description}
+
+\section{Services \& Order Forms}
+\subsection{Order Forms.} Articom shall provide the Services specified in one or more Order Forms executed by the Parties. In the event of a conflict between this Agreement and an Order Form, the terms of the Order Form shall prevail only for that specific transaction.
+
+\subsection{SaaS Services.} For SaaS Services, Articom grants Customer a non-exclusive, non-transferable, non-sublicensable right during the Term to access and use the Articom Platform solely for Customer's internal business operations, subject to the terms of this Agreement and the applicable Order Form.
+
+\subsection{Standalone Deployment.} For Standalone Deployments, Articom grants Customer a non-exclusive, non-transferable, non-sublicensable license to install and use the Articom software solely on Customer's own infrastructure for its internal business operations, subject to the terms of this Agreement and the applicable Order Form. Customer shall be solely responsible for procuring, managing, and securing the infrastructure (including cloud services) required to operate the software.
+
+\subsection{Professional Services.} Articom shall perform Professional Services as described in an applicable SOW or Order Form. Unless otherwise agreed, all deliverables created by Articom as part of Professional Services (e.g., custom code, ``Skills'') shall be licensed to Customer under the same terms as the associated Service (i.e., as part of the SaaS Service or Standalone Deployment).
+
+\subsection{Articom SDK \& Hybrid Deployment.} If specified in an Order Form, Customer may use the Articom Software Development Kit (``SDK'') to build and host its own data connectors or ``Skills'' (``Customer Skills''). Customer retains all ownership of its Customer Skills. Customer grants Articom a limited right to access and call such Customer Skills for the sole purpose of providing the Services. Customer is solely responsible for the security, performance, and maintenance of its Customer Skills and the infrastructure they run on. Articom provides the SDK on an ``AS-IS'' basis without warranty. Articom shall have no liability of any kind (including for direct or indirect financial damages) arising from or related to Customer's use of the SDK or any Customer Skills developed by Customer.
+
+\section{Fees \& Payment}
+\subsection{Fees.} Customer shall pay all fees specified in the applicable Order Forms (``Fees'').
+
+\subsection{Invoicing \& Payment.} Unless otherwise specified in an Order Form, all Fees for subscription-based Services will be invoiced annually in advance. Fees for usage-based Services (e.g., overages) will be invoiced monthly in arrears. All invoices are due and payable within thirty (30) days of the invoice date (``Payment Term'').
+
+\subsection{Taxes.} All Fees are exclusive of any taxes, levies, duties, or similar governmental assessments, including value-added, sales, use, or withholding taxes (collectively, ``Taxes''). Customer is responsible for paying all Taxes associated with its purchases, excluding taxes based on Articom's net income.
+
+\subsection{Late Payments.} Overdue invoices may be subject to a finance charge of 1.5\% per month on the unpaid balance or the maximum rate permitted by law, whichever is lower.
+
+\subsection{Overage Charges.} If Customer's usage of the Services exceeds the allowances specified in an Order Form (e.g., message counts, voice minutes), Customer will be invoiced for such overages at the rates specified in the Order Form.
+
+\subsection{Suspension for Non-Payment.} If any invoiced amount is overdue by more than fourteen (14) days, Articom may, without limiting its other rights and remedies, suspend Customer's access to the Services upon written notice until such amounts are paid in full. Articom will provide at least seven (7) days' prior written notice that an account is overdue before suspending services. Suspension of Services does not relieve Customer of its obligation to pay any outstanding fees.
+
+\section{Customer Responsibilities}
+\subsection{Customer Data.} Customer represents and warrants that it has all necessary rights, consents, and permissions to provide Customer Data to Articom and that the use of such Data by Articom to provide the Services will not violate any applicable laws or third-party rights. Customer is solely responsible for the accuracy and legality of all Customer Data.
+
+\subsection{Acceptable Use.} Customer shall not, and shall not permit its End Users to: (a) use the Services for any illegal or fraudulent purpose; (b) attempt to gain unauthorized access to the Articom Platform or its related systems; (c) interfere with or disrupt the integrity or performance of the Services; (d) use the Services to store or transmit infringing, libelous, or otherwise unlawful material.
+
+\subsection{End User Compliance.} Customer is responsible for all activities conducted by its End Users. Customer shall ensure that its End Users comply with all terms of this Agreement and any applicable laws. A breach by an End User is deemed a breach by Customer.
+
+\subsection{Account Security.} Customer is responsible for maintaining the confidentiality of its account credentials and for all activities that occur under its account.
+
+\section{Third-Party Services (AI Models)}
+Customer acknowledges that the Articom Platform integrates with and relies upon third-party large language models and other AI services (e.g., Google Gemini, Azure OpenAI) (``Third-Party AI Services''). Articom does not control and is not responsible for the content, accuracy, or availability of these Third-Party AI Services. Customer's use of these services may be subject to the separate terms and conditions of the third-party providers. Articom is not liable for any ``hallucinations,'' inaccuracies, or offensive content generated by Third-Party AI Services.
+
+\section{Intellectual Property}
+\subsection{Articom IP.} As between the Parties, Articom owns all right, title, and interest in and to the Articom Platform, the Services, the Documentation, the SDK, and all underlying software, technology, and intellectual property (``Articom IP''). No rights are granted to Customer other than as expressly set forth herein.
+
+\subsection{Customer IP.} As between the Parties, Customer owns all right, title, and interest in and to the Customer Data and any Customer Skills.
+
+\subsection{Feedback.} If Customer provides any suggestions, ideas, or feedback to Articom (``Feedback''), Articom shall have a royalty-free, worldwide, irrevocable, perpetual license to use and incorporate such Feedback into its Services without any obligation to Customer.
+
+\section{Confidentiality}
+\subsection{Definition.} ``Confidential Information'' means all information disclosed by one Party (``Discloser'') to the other (``Recipient'') that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure. This includes, but is not limited to, the terms of this Agreement, business plans, customer lists, and technical information.
+
+\subsection{Obligations.} The Recipient shall: (a) use the Discloser's Confidential Information solely to perform its obligations under this Agreement; and (b) protect such Confidential Information with at least the same degree of care it uses to protect its own confidential information of a similar nature (but in no event less than reasonable care).
+
+\subsection{Exclusions.} Confidential Information does not include information that: (a) is or becomes publicly known through no breach of this Agreement; (b) was lawfully known to the Recipient prior to its disclosure; (c) is received from a third party without breach of any obligation of confidentiality; or (d) was independently developed by the Recipient.
+
+\subsection{Compelled Disclosure.} If the Recipient is required by law to disclose Confidential Information, it shall provide prompt written notice to the Discloser (if legally permitted) to enable the Discloser to seek a protective order.
+
+\section{Data Privacy \& Security}
+\subsection{Security.} Articom shall implement and maintain appropriate technical and organizational security measures designed to protect Customer Data against accidental or unlawful destruction, loss, alteration, or unauthorized access.
+
+\subsection{Data Processing.} Articom shall process Customer Data (including any personal data) only in accordance with Customer's lawful instructions and as necessary to provide the Services.
+
+\subsection{Privacy Policy.} Articom's use of personal data is governed by its Privacy Policy, which is available on its website and incorporated herein by reference. Customer agrees to make its End Users aware of Articom's Privacy Policy.
+
+\section{Warranties \& Disclaimers}
+\subsection{Mutual Warranties.} Each Party represents and warrants that it has the legal power and authority to enter into this Agreement.
+
+\subsection{Articom Warranties.} Articom warrants that: (a) the SaaS Services will perform materially in accordance with the Documentation; and (b) it will perform Professional Services in a professional and workmanlike manner.
+
+\subsection{Disclaimer.} EXCEPT AS EXPRESSLY PROVIDED HEREIN, ARTICOM MAKES NO WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. ARTICOM DOES NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF HARMFUL COMPONENTS. THE SERVICES ARE PROVIDED ``AS IS''.
+
+\section{Term \& Termination}
+\subsection{Term.} This Agreement commences on the Effective Date and continues until all Order Forms have expired or been terminated (``Term'').
+
+\subsection{Termination for Cause.} Either Party may terminate this Agreement: (a) upon thirty (30) days' written notice of a material breach by the other Party, if such breach remains uncured at the expiration of such period; or (b) immediately upon written notice if the other Party becomes the subject of a petition in bankruptcy or any other proceeding relating to insolvency or assignment for the benefit of creditors.
+
+\subsection{Effect of Termination.} Upon termination, all rights granted to Customer shall immediately cease. Customer shall pay all outstanding Fees due through the date of termination. The provisions of Sections 3, 6, 7, 9.3, 11, 12, and 13 shall survive termination.
+
+\subsection{Data Deletion.} Upon Customer's written request within thirty (30) days of termination, Articom will make Customer Data available for export and will thereafter delete Customer Data from its systems.
+
+\section{Limitation of Liability}
+\subsection{Exclusion of Damages.} IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY LOST PROFITS, LOSS OF DATA, OR ANY INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+\subsection{Liability Cap.} IN NO EVENT SHALL ARTICOM'S AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT EXCEED THE TOTAL AMOUNT PAID BY CUSTOMER HEREUNDER IN THE THREE (3) MONTHS PRECEDING THE FIRST INCIDENT OUT OF WHICH THE LIABILITY AROSE.
+
+\subsection{Exceptions.} The limitations in this Section 11 shall not apply to: (a) a Party's breach of its confidentiality obligations; (b) a Party's indemnification obligations; or (c) Customer's payment obligations.
+
+\section{Indemnification}
+\subsection{By Articom.} Articom shall defend Customer against any third-party claim alleging that the Articom Platform (as provided by Articom) infringes such third party's intellectual property rights, and shall indemnify Customer for any damages finally awarded against Customer in connection with such claim.
+
+\subsection{By Customer.} Customer shall indemnify, defend, and hold Articom harmless from and against any and all claims, losses, damages, liabilities, and costs (including reasonable attorneys' fees) arising from: (a) Customer Data; (b) Customer's breach of Section 4.2 (Acceptable Use); (c) Customer's use of the Services in a manner not authorized by this Agreement; or (d) any Customer Skills, including but not limited to, any damage (including financial damages) caused by such Customer Skills to the Articom Platform, Articom's systems, or any third party.
+
+\subsection{Procedure.} The indemnified Party shall provide prompt written notice of the claim and reasonable cooperation to the indemnifying Party, who shall have sole control over the defense and settlement of the claim.
+
+\section{General Provisions}
+\subsection{Force MajeVure.} Neither Party shall be liable for any delay or failure to perform due to causes beyond its reasonable control, including acts of God, war, terrorism, or natural disasters.
+
+\subsection{Notices.} All notices shall be in writing and addressed to the parties at the addresses first set forth above.
+
+\subsection{Assignment.} Neither Party may assign this Agreement without the prior written consent of the other Party, except in connection with a merger, acquisition, or sale of all or substantially all of its assets.
+
+\subsection{Independent Contractors.} The Parties are independent contractors. This Agreement does not create a partnership, franchise, joint venture, or employment relationship.
+
+\subsection{No Third-Party Beneficiaries.} There are no third-party beneficiaries to this Agreement.
+
+\subsection{Waiver.} No waiver of any breach shall constitute a waiver of any subsequent breach.
+
+\subsection{Severability.} If any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.
+
+\subsection{Entire Agreement.} This Agreement, including all Exhibits and Order Forms, constitutes the entire agreement between the Parties and supersedes all prior discussions and agreements.
+
+\subsection{Amendment.} This Agreement may be amended only by a written instrument signed by both Parties.
+
+\subsection{Counterparts.} This Agreement may be executed in counterparts, including by electronic signature (e.g., DocuSign), which shall be deemed an original.
+
+\subsection{Governing Law.} This Agreement shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of laws principles. The Parties consent to the exclusive jurisdiction of the state and federal courts located in San Francisco, California.
+
+% --- APPENDICES ---
+\begin{appendices}
+
+\section{Order Form}
+(Attached Separately)
+\newline
+\newline
+This MSA will be attached to each specific Quotation, Proposal, or Order Form, which will serve as the ``Order Form'' and detail the specific Services, Fees, Term, and other commercial details.
+
+\section{Service Level Agreement (SLA)}
+This Service Level Agreement (``SLA'') applies to the SaaS Services provided by Articom to Customer under an active Order Form.
+
+\subsection*{1. Uptime Guarantee}
+\textbf{``Uptime''}: Articom guarantees that the SaaS Services will have an ``Uptime'' of at least 98.0\% in any given calendar month.
+
+\textbf{``Downtime''}: Uptime is calculated as (Total Minutes in Month - Downtime Minutes) / Total Minutes in Month. ``Downtime'' is the total number of minutes the SaaS Services are unavailable.
+
+\textbf{Exclusions}: Downtime does not include unavailability due to: (a) Scheduled Maintenance; (b) force majeure events; (c) Customer's or its End Users' equipment, software, or network issues; (d) Customer's misuse of the Services; (e) outages of Third-Party AI Services; or (f) failures, outages, or disruptions originating from third-party telecommunication carriers, SIP trunking providers, or other public network services not within Articom's reasonable control.
+
+\textbf{``Scheduled Maintenance''}: Articom will provide at least 48 hours' notice for non-urgent scheduled maintenance.
+
+\subsection*{2. Support Response Times}
+Articom shall provide technical support to Customer's designated contacts. Support requests must be submitted via the designated channel (e.g., support@articom.io or a dedicated portal).
+
+\begin{center}
+\begin{tabular}{p{2.5cm} p{8cm} p{3.5cm}}
+\toprule
+\textbf{Priority} & \textbf{Definition} & \textbf{Response Time Target} \\
+\midrule
+P1 - Critical & System-wide outage; core functionality is completely unavailable. & 1 Hour \\
+P2 - High & ``A critical component is malfunctioning, causing significant business impact.'' & 4 Hours \\
+P3 - Normal & ``General inquiries, bug reports, or performance degradation.'' & 24 Business Hours \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+``Response Time'' is the time from Articom's receipt of a properly submitted support ticket to the time an Articom support engineer acknowledges the ticket and begins to work on the issue.
+
+All times apply during Articom's standard business hours, except for P1-Critical issues, which are monitored 24/7.
+
+\subsection*{3. Service Credit}
+If Articom fails to meet the 98.0\% Uptime guarantee in any calendar month, Customer shall be eligible to receive a service credit.
+
+The service credit will be 4\% of the Monthly Subscription Fee for the affected SaaS Service for that month.
+
+To receive a credit, Customer must submit a written request within thirty (30) days of the end of the month in which the Uptime guarantee was not met. This is Customer's sole and exclusive remedy for any breach of this SLA.
+
+\end{appendices}
+
+\end{document}
