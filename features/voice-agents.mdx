@@ -1,0 +1,297 @@
+---
+title: "Voice Agents"
+description: "AI-powered voice agents for automated phone support in multiple languages"
+icon: "phone"
+---
+
+## Overview
+
+Articom's Voice Agent Integration enables you to deploy AI-powered voice assistants that can handle customer calls automatically. Support customers in their native language, reduce wait times, and provide 24/7 phone support without human intervention.
+
+## Professional Voice Features
+
+<CardGroup cols={2}>
+  <Card title="Multi-Language Support" icon="language">
+    Interact fluently in multiple languages automatically
+  </Card>
+  <Card title="Natural Conversations" icon="comments">
+    Human-like voice interactions with context awareness
+  </Card>
+  <Card title="Smart Call Routing" icon="route">
+    Automatically route calls to appropriate departments or agents
+  </Card>
+  <Card title="Voice Workflow Automation" icon="diagram-project">
+    Automate call flows and responses without manual intervention
+  </Card>
+</CardGroup>
+
+## Key Capabilities
+
+### Language Flexibility
+Enable your voice agents to communicate in multiple languages:
+- **Auto-Detection**: Automatically identify the caller's language
+- **40+ Languages**: Support for major global languages
+- **Regional Accents**: Handle various accents and dialects
+- **Real-Time Translation**: Convert between languages seamlessly
+
+### Voice Workflow Automation
+Automate call flows, routing, and responses with smart voice scripting:
+- No need for manual transfers
+- Eliminate long hold times
+- Intelligent call distribution
+- Context-aware routing
+
+### Call Centre Automation
+Transform your call center operations:
+- **Reduce Wait Times**: Instant call answering
+- **Personalize Responses**: Use customer data for tailored interactions
+- **Native Language Support**: Ensure callers feel truly heard
+- **24/7 Availability**: Never miss a call, even outside business hours
+
+## How Voice Agents Work
+
+<Steps>
+  <Step title="Call Received">
+    Customer calls your business number
+  </Step>
+  <Step title="Voice Agent Answers">
+    AI agent greets the caller and identifies their language
+  </Step>
+  <Step title="Intent Recognition">
+    Agent understands the caller's request using natural language processing
+  </Step>
+  <Step title="Response & Action">
+    Agent provides information, books appointments, or routes to appropriate team
+  </Step>
+  <Step title="Call Completion">
+    Issue resolved or seamlessly transferred to human agent if needed
+  </Step>
+</Steps>
+
+## Use Cases
+
+### Customer Support Hotline
+- Answer common inquiries automatically
+- Provide account information
+- Troubleshoot basic issues
+- Transfer complex cases to specialists
+
+### Appointment Booking
+- Schedule appointments automatically
+- Check availability in real-time
+- Send confirmation messages
+- Handle rescheduling and cancellations
+
+### Order Status & Tracking
+- Provide order status updates
+- Track shipments
+- Process returns and exchanges
+- Handle billing inquiries
+
+### Restaurant Reservations
+- Take table reservations
+- Manage waitlists
+- Handle special requests
+- Confirm bookings
+
+## Voice Agent Configuration
+
+### Call Flow Design
+
+```plaintext
+Incoming Call
+    ↓
+Greeting: "Thank you for calling [Business Name]. How can I help you today?"
+    ↓
+Intent Detection
+    ├─→ Appointment Booking → Check Calendar → Confirm Booking
+    ├─→ Order Status → Retrieve Order Info → Provide Update
+    ├─→ Technical Support → Troubleshoot → Resolve or Transfer
+    └─→ General Inquiry → Answer from KB → Offer Further Help
+```
+
+### Voice Customization
+
+<AccordionGroup>
+  <Accordion title="Voice Selection">
+    Choose from various voice profiles:
+    - Male/Female voices
+    - Different accents (American, British, Australian, etc.)
+    - Speech rate and pitch adjustment
+    - Professional or friendly tone
+  </Accordion>
+  
+  <Accordion title="Greeting Messages">
+    Customize welcome messages:
+    - Business hours greeting
+    - After-hours message
+    - Holiday announcements
+    - Department-specific greetings
+  </Accordion>
+  
+  <Accordion title="Hold Music & Messages">
+    Configure on-hold experience:
+    - Custom hold music
+    - Periodic status updates
+    - Estimated wait time announcements
+    - Marketing messages during hold
+  </Accordion>
+  
+  <Accordion title="Escalation Rules">
+    Define when to transfer to humans:
+    - Customer request
+    - Complex queries
+    - Frustrated customer detection
+    - VIP customer routing
+  </Accordion>
+</AccordionGroup>
+
+## Integration Options
+
+### Phone System Integration
+- **SIP Trunk Integration**: Connect with existing phone systems
+- **Cloud PBX**: Use Articom's cloud-based phone system
+- **VoIP Platforms**: Integrate with VoIP providers
+- **Mobile Numbers**: Support for mobile and landline numbers
+
+### CRM Integration
+Sync voice call data with your CRM:
+- Automatic call logging
+- Customer interaction history
+- Sentiment analysis
+- Follow-up task creation
+
+<Card title="CRM Integration Guide" icon="database" href="/integrations/crm">
+  Learn about CRM integration
+</Card>
+
+## Analytics & Reporting
+
+Track voice agent performance with detailed analytics:
+
+### Call Metrics
+- **Total Calls Handled**: Volume of automated calls
+- **Resolution Rate**: Percentage resolved without human intervention
+- **Average Call Duration**: Time spent on each call
+- **Transfer Rate**: How often calls are transferred to humans
+
+### Customer Satisfaction
+- **CSAT Scores**: Post-call satisfaction ratings
+- **Sentiment Analysis**: Emotion detection during calls
+- **First Call Resolution**: Issues resolved in single call
+- **Callback Requests**: Customers requesting callbacks
+
+### Business Insights
+- **Peak Call Times**: Identify busy periods
+- **Common Inquiries**: Most frequent call reasons
+- **Language Distribution**: Languages used by callers
+- **Conversion Tracking**: Calls leading to bookings/sales
+
+<Card title="View Analytics Features" icon="chart-line" href="/features/analytics">
+  Explore analytics dashboard
+</Card>
+
+## Sample Voice Interactions
+
+### Example 1: Appointment Booking
+
+```plaintext
+Voice Agent: "Thank you for calling ABC Clinic. How may I help you today?"
+
+Caller: "I'd like to book an appointment with Dr. Smith"
+
+Voice Agent: "I'd be happy to help you schedule an appointment with Dr. Smith. 
+             What day works best for you?"
+
+Caller: "Next Tuesday afternoon"
+
+Voice Agent: "Let me check Dr. Smith's availability for Tuesday afternoon. 
+             I have 2:00 PM or 4:30 PM available. Which time would you prefer?"
+
+Caller: "2:00 PM works"
+
+Voice Agent: "Perfect! I've booked you for Tuesday at 2:00 PM with Dr. Smith. 
+             You'll receive a confirmation text shortly. Is there anything else?"
+
+Caller: "No, that's all"
+
+Voice Agent: "Great! We'll see you Tuesday at 2:00 PM. Have a wonderful day!"
+```
+
+### Example 2: Order Tracking
+
+```plaintext
+Voice Agent: "Hello! Thank you for calling XYZ Store. How can I assist you?"
+
+Caller: "I want to track my order"
+
+Voice Agent: "I can help with that! May I have your order number please?"
+
+Caller: "It's 12345"
+
+Voice Agent: "Thank you. Let me check order 12345 for you. 
+             Your order was shipped on November 18th and is currently in transit. 
+             The expected delivery date is November 21st. 
+             Would you like me to text you the tracking link?"
+
+Caller: "Yes please"
+
+Voice Agent: "I've sent the tracking link to your registered mobile number. 
+             Is there anything else I can help you with today?"
+```
+
+## Best Practices
+
+<Note>
+  **Pro Tip**: Always offer the option to speak with a human agent, especially for frustrated or confused callers.
+</Note>
+
+1. **Keep It Natural**: Use conversational language, not robotic responses
+2. **Be Clear**: Speak slowly and clearly, especially when providing important information
+3. **Confirm Understanding**: Repeat back important details (dates, times, names)
+4. **Set Expectations**: Let callers know when they'll receive confirmations or callbacks
+5. **Easy Escalation**: Make it simple to reach a human agent when needed
+
+## Getting Started
+
+<Steps>
+  <Step title="Choose Your Number">
+    Select a dedicated phone number or integrate with existing system
+  </Step>
+  <Step title="Design Call Flows">
+    Map out conversation paths and responses
+  </Step>
+  <Step title="Configure Voice Settings">
+    Select voice profile, language, and tone
+  </Step>
+  <Step title="Train & Test">
+    Upload knowledge base and test with sample calls
+  </Step>
+  <Step title="Go Live">
+    Activate your voice agent and monitor performance
+  </Step>
+</Steps>
+
+## Pricing
+
+Voice agent pricing is based on:
+- **Voice Minutes**: Per-minute usage for incoming and outgoing calls
+- **Phone Numbers**: Monthly cost for dedicated numbers
+- **Advanced Features**: Premium voice profiles, multi-language support
+
+<Card title="View Pricing" icon="dollar-sign" href="https://articom.io/#pricing">
+  See detailed pricing information
+</Card>
+
+## Support
+
+Need help setting up your voice agents?
+
+<CardGroup cols={2}>
+  <Card title="Documentation" icon="book" href="/api-reference/introduction">
+    API documentation for voice integration
+  </Card>
+  <Card title="Contact Support" icon="headset" href="mailto:support@articom.io">
+    Email our support team
+  </Card>
+</CardGroup>

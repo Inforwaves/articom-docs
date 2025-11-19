@@ -1,63 +1,73 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "linden",
-  "name": "articom",
+  "theme": "maple",
+  "name": "Articom",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#077A5C"
+    "primary": "#0066CC",
+    "light": "#3399FF",
+    "dark": "#004499"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "features/overview"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Core Features",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "features/chatbot",
+              "features/voice-agents",
+              "features/analytics",
+              "features/knowledge-base",
+              "features/automation"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "AI Agents",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "agents/overview",
+              "agents/event-registration",
+              "agents/restaurant",
+              "agents/ecommerce",
+              "agents/ticketing",
+              "agents/complaints",
+              "agents/live-chat"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Integrations",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "integrations/overview",
+              "integrations/whatsapp",
+              "integrations/messenger",
+              "integrations/instagram",
+              "integrations/slack",
+              "integrations/crm"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "API Reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "API Documentation",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/introduction",
+              "api-reference/authentication"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Endpoints",
             "pages": [
               "api-reference/endpoint/get",
               "api-reference/endpoint/create",
@@ -66,38 +76,56 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Legal",
+        "groups": [
+          {
+            "group": "Agreements",
+            "pages": [
+              "legal/master-agreement",
+              "legal/sla",
+              "legal/privacy-policy"
+            ]
+          }
+        ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Website",
+          "href": "https://articom.io",
+          "icon": "globe"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Request Demo",
+          "href": "https://articom.io/#demo",
+          "icon": "calendar"
+        },
+        {
+          "anchor": "Support",
+          "href": "mailto:support@articom.io",
+          "icon": "headset"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/articom.png",
+    "dark": "/logo/articom.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@articom.io"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started",
+      "href": "https://articom.io"
     }
   },
   "contextual": {
@@ -114,9 +142,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://www.linkedin.com/showcase/articomio/",
+      "facebook": "https://web.facebook.com/ArticomIO",
+      "instagram": "https://www.instagram.com/articomio/"
     }
   }
 }
