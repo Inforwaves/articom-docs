@@ -3,11 +3,11 @@
   "theme": "maple",
   "name": "Articom",
   "colors": {
-    "primary": "#0066CC",
-    "light": "#3399FF",
-    "dark": "#004499"
+    "primary": "#524ED2",
+    "light": "#7A77CD",
+    "dark": "#241FA9"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "logo/darkArticom.svg",
   "navigation": {
     "tabs": [
       {
@@ -112,8 +112,8 @@
     }
   },
   "logo": {
-    "light": "/logo/articom.png",
-    "dark": "/logo/articom.png"
+    "light": "/logo/lightArticom.svg",
+    "dark": "/logo/darkArticom.svg"
   },
   "navbar": {
     "links": [

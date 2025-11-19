@@ -1,0 +1,216 @@
+---
+title: "Authentication"
+description: "Securely authenticate your API requests"
+icon: "key"
+---
+
+## API Authentication
+
+All Articom API requests require authentication using API keys. This ensures secure access to your data and resources.
+
+## Getting Your API Key
+
+<Steps>
+  <Step title="Access Dashboard">
+    Log in to your Articom account at [dashboard.articom.io](https://dashboard.articom.io)
+  </Step>
+  <Step title="Navigate to API Settings">
+    Go to **Settings** → **API Keys** → **Create API Key**
+  </Step>
+  <Step title="Name Your Key">
+    Give your API key a descriptive name (e.g., "Production Server", "Development")
+  </Step>
+  <Step title="Copy and Secure">
+    Copy the key immediately - it won't be shown again
+  </Step>
+</Steps>
+
+<Warning>
+  **Store your API key securely!** Treat it like a password. Never commit it to version control or share it publicly.
+</Warning>
+
+## Using Your API Key
+
+Include your API key in the `Authorization` header using Bearer authentication:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+### Example Request
+
+```bash
+curl https://api.articom.io/v1/conversations \
+  -H "Authorization: Bearer sk_live_abc123..." \
+  -H "Content-Type: application/json"
+```
+
+### With SDKs
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    const Articom = require('@articom/sdk');
+    
+    const client = new Articom({
+      apiKey: process.env.ARTICOM_API_KEY
+    });
+    
+    const conversations = await client.conversations.list();
+    ```
+  </Tab>
+  
+  <Tab title="Python">
+    ```python
+    import articom
+    
+    client = articom.Client(
+        api_key=os.environ.get('ARTICOM_API_KEY')
+    )
+    
+    conversations = client.conversations.list()
+    ```
+  </Tab>
+  
+  <Tab title="PHP">
+    ```php
+    <?php
+    require 'vendor/autoload.php';
+    
+    $client = new \Articom\Client([
+        'api_key' => getenv('ARTICOM_API_KEY')
+    ]);
+    
+    $conversations = $client->conversations->list();
+    ```
+  </Tab>
+</Tabs>
+
+## API Key Types
+
+### Live Keys
+- Prefix: `sk_live_`
+- Use in production
+- Access to live customer data
+- Rate limits apply per plan
+
+### Test Keys
+- Prefix: `sk_test_`
+- Use in development/testing
+- Sandbox environment
+- No actual customer data
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Environment Variables">
+    Store API keys in environment variables, never hardcode:
+    
+    ```bash
+    # .env file
+    ARTICOM_API_KEY=sk_live_abc123...
+    ```
+  </Accordion>
+  
+  <Accordion title="Key Rotation">
+    Regularly rotate API keys for security:
+    - Create new key
+    - Update applications
+    - Delete old key
+    - Recommended: Every 90 days
+  </Accordion>
+  
+  <Accordion title="Separate Keys">
+    Use different keys for different environments:
+    - Development: Test key
+    - Staging: Separate live key
+    - Production: Separate live key
+  </Accordion>
+  
+  <Accordion title="Monitor Usage">
+    Track API key usage in dashboard:
+    - Request volume
+    - Error rates
+    - Unusual activity
+  </Accordion>
+</AccordionGroup>
+
+## Security
+
+### Key Permissions
+Each API key can have specific permissions:
+- **Read**: View conversations and analytics
+- **Write**: Create and update resources
+- **Delete**: Remove conversations and data
+- **Admin**: Full access including settings
+
+### IP Whitelisting
+Enterprise customers can restrict API access to specific IP addresses.
+
+### Webhook Signatures
+Verify webhook authenticity using HMAC signatures:
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhook(payload, signature, secret) {
+  const hash = crypto
+    .createHmac('sha256', secret)
+    .update(JSON.stringify(payload))
+    .digest('hex');
+    
+  return hash === signature;
+}
+```
+
+## Revoking API Keys
+
+If an API key is compromised:
+
+<Steps>
+  <Step title="Immediately Revoke">
+    Go to Settings → API Keys → Delete the compromised key
+  </Step>
+  <Step title="Generate New Key">
+    Create a replacement API key
+  </Step>
+  <Step title="Update Applications">
+    Deploy new key to all applications
+  </Step>
+  <Step title="Monitor">
+    Watch for any unauthorized access attempts
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+### Common Authentication Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `401 Unauthorized` | Invalid or missing API key | Check key is correct and in Authorization header |
+| `403 Forbidden` | Insufficient permissions | Verify key has required permissions |
+| `401 Invalid Key Format` | Malformed key | Ensure proper Bearer token format |
+
+### Testing Your API Key
+
+```bash
+curl https://api.articom.io/v1/auth/verify \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+Response:
+```json
+{
+  "valid": true,
+  "key_id": "key_123",
+  "permissions": ["read", "write"],
+  "environment": "live"
+}
+```
+
+## Need Help?
+
+<Card title="Contact API Support" icon="headset" href="mailto:api@articom.io">
+  Questions about API authentication? Email api@articom.io
+</Card>

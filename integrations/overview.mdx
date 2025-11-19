@@ -1,0 +1,128 @@
+---
+title: "Integrations Overview"
+description: "Connect Articom with your existing tools and platforms"
+icon: "plug"
+---
+
+## Overview
+
+Articom integrates seamlessly with your existing business tools, CRM systems, and communication platforms to provide a unified customer support experience.
+
+## Integration Categories
+
+<CardGroup cols={2}>
+  <Card title="Communication Channels" icon="comments" href="/integrations/whatsapp">
+    WhatsApp, Messenger, Instagram, Slack
+  </Card>
+  <Card title="CRM Systems" icon="database" href="/integrations/crm">
+    Salesforce, HubSpot, Dynamics365
+  </Card>
+  <Card title="E-Commerce Platforms" icon="cart-shopping">
+    Shopify, WooCommerce, Magento
+  </Card>
+  <Card title="Custom Integrations" icon="code">
+    REST API for custom connections
+  </Card>
+</CardGroup>
+
+## Available Integrations
+
+### Communication Platforms
+<AccordionGroup>
+  <Accordion title="WhatsApp Business" icon="whatsapp">
+    Full WhatsApp Business API integration for automated customer support
+    [Learn more →](/integrations/whatsapp)
+  </Accordion>
+  <Accordion title="Facebook Messenger" icon="facebook">
+    Connect your Facebook page for automated message responses
+    [Learn more →](/integrations/messenger)
+  </Accordion>
+  <Accordion title="Instagram" icon="instagram">
+    Handle Instagram DMs automatically
+    [Learn more →](/integrations/instagram)
+  </Accordion>
+  <Accordion title="Slack" icon="slack">
+    Internal team communication and IT helpdesk automation
+    [Learn more →](/integrations/slack)
+  </Accordion>
+</AccordionGroup>
+
+### CRM & Business Tools
+<AccordionGroup>
+  <Accordion title="Salesforce" icon="salesforce">
+    Sync customer data and conversation history with Salesforce
+  </Accordion>
+  <Accordion title="HubSpot" icon="hubspot">
+    Integrate with HubSpot CRM for unified customer view
+  </Accordion>
+  <Accordion title="Microsoft Dynamics 365" icon="microsoft">
+    Connect with Dynamics 365 for enterprise-grade CRM integration
+  </Accordion>
+</AccordionGroup>
+
+[View CRM Integration Guide →](/integrations/crm)
+
+## How Integrations Work
+
+<Steps>
+  <Step title="Select Integration">
+    Choose the platform you want to connect
+  </Step>
+  <Step title="Authenticate">
+    Provide necessary credentials and permissions
+  </Step>
+  <Step title="Configure">
+    Set up sync rules and data mapping
+  </Step>
+  <Step title="Test">
+    Verify the integration is working correctly
+  </Step>
+  <Step title="Go Live">
+    Activate the integration for production use
+  </Step>
+</Steps>
+
+## Custom API Integration
+
+For custom integrations, Articom provides a comprehensive REST API:
+
+```json
+{
+  "conversation_id": "conv_123",
+  "customer": {
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "channel": "whatsapp",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What are your business hours?"
+    },
+    {
+      "role": "assistant",
+      "content": "We're open Monday-Friday 9 AM to 6 PM."
+    }
+  ]
+}
+```
+
+<Card title="API Documentation" icon="code" href="/api-reference/introduction">
+  View full API reference
+</Card>
+
+## Integration Benefits
+
+- **Unified Data**: All customer interactions in one place
+- **Automated Workflows**: Trigger actions across systems
+- **Better Insights**: Combined analytics from all platforms
+- **Improved Efficiency**: Eliminate manual data entry
+- **Enhanced Experience**: Consistent service across channels
+
+## Need Help?
+
+Our integration team is ready to assist with setup and customization.
+
+<Card title="Contact Integration Support" icon="envelope" href="mailto:support@articom.io">
+  Get integration assistance
+</Card>
