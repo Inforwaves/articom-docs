@@ -4,14 +4,17 @@ FROM node:20-alpine
 # Set working directory
 WORKDIR /app
 
-# Install Mintlify CLI globally
+# Install Mintlify
 RUN npm install -g mintlify
 
-# Copy all documentation files
+# Copy docs
 COPY . .
 
-# Expose port 3000 (default Mintlify port)
+# Build the Mintlify site
+RUN mintlify build
+
+# Expose port
 EXPOSE 3000
 
-# Start the Mintlify server
-CMD ["mintlify", "dev", "--host", "0.0.0.0"]
+# Start production server
+CMD ["mintlify", "start", "--host", "0.0.0.0"]
