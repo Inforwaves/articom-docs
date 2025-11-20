@@ -5,13 +5,13 @@ WORKDIR /app
 # Copy package files
 COPY package.json yarn.lock* ./
 
-# Install dependencies
-RUN yarn install
+# Install dependencies (skip postinstall)
+RUN yarn install --ignore-scripts
 
 # Copy all files
 COPY . .
 
-# Build the application
+# Build the application (this will run fumadocs-mdx)
 RUN yarn build
 
 EXPOSE 3000
