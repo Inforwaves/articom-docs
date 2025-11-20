@@ -1,4 +1,6 @@
-FROM node:current-slim
+# Use the official Node 20 LTS image
+FROM node:20-slim
+
 
 # Install the Mintlify CLI globally
 RUN npm install -g mint
