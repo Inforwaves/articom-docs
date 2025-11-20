@@ -1,0 +1,412 @@
+---
+title: CRM Integration
+description: Connect Articom with your CRM system
+---
+
+# CRM Integration
+
+Integrate Articom with popular CRM systems to sync customer data, track interactions, and maintain a unified view of your customers.
+
+## Supported CRMs
+
+- Salesforce
+- HubSpot
+- Zendesk
+- Microsoft Dynamics 365
+- Pipedrive
+- Zoho CRM
+- Custom CRM (via API)
+
+## Salesforce Integration
+
+### Setup
+
+```javascript
+const salesforce = await articom.integrations.connect({
+  type: "salesforce",
+  config: {
+    instanceUrl: "https://yourcompany.salesforce.com",
+    clientId: "YOUR_CLIENT_ID",
+    clientSecret: "YOUR_CLIENT_SECRET",
+    accessToken: "YOUR_ACCESS_TOKEN",
+    refreshToken: "YOUR_REFRESH_TOKEN"
+  }
+});
+```
+
+### Features
+
+#### Sync Contacts
+
+```javascript
+// Create/update contact
+await salesforce.syncContact({
+  email: "customer@example.com",
+  firstName: "John",
+  lastName: "Doe",
+  phone: "+1234567890",
+  customFields: {
+    leadSource: "Chatbot",
+    industry: "Technology"
+  }
+});
+```
+
+#### Log Activities
+
+```javascript
+// Log conversation as activity
+await salesforce.logActivity({
+  type: "Chat",
+  subject: "Customer Support Conversation",
+  description: conversationSummary,
+  relatedTo: contactId,
+  status: "Completed",
+  duration: conversationDuration
+});
+```
+
+#### Create Cases
+
+```javascript
+// Auto-create support case
+await salesforce.createCase({
+  subject: "Product Inquiry",
+  description: conversationTranscript,
+  priority: "High",
+  status: "New",
+  contactId: contactId,
+  origin: "Chat"
+});
+```
+
+## HubSpot Integration
+
+### Setup
+
+```javascript
+const hubspot = await articom.integrations.connect({
+  type: "hubspot",
+  config: {
+    apiKey: "YOUR_API_KEY",
+    portalId: "YOUR_PORTAL_ID"
+  }
+});
+```
+
+### Features
+
+#### Contact Management
+
+```javascript
+// Create or update contact
+await hubspot.upsertContact({
+  email: "customer@example.com",
+  properties: {
+    firstname: "John",
+    lastname: "Doe",
+    phone: "+1234567890",
+    lifecyclestage: "lead",
+    hs_lead_status: "NEW"
+  }
+});
+```
+
+#### Deal Tracking
+
+```javascript
+// Create deal from conversation
+await hubspot.createDeal({
+  dealname: "Sales Inquiry - John Doe",
+  amount: 5000,
+  dealstage: "appointmentscheduled",
+  pipeline: "default",
+  associatedContactId: contactId
+});
+```
+
+#### Email Integration
+
+```javascript
+// Log conversation as email
+await hubspot.logEmail({
+  contactId: contactId,
+  subject: "Chat Conversation",
+  body: conversationHTML,
+  direction: "INCOMING_EMAIL"
+});
+```
+
+## Zendesk Integration
+
+### Setup
+
+```javascript
+const zendesk = await articom.integrations.connect({
+  type: "zendesk",
+  config: {
+    subdomain: "yourcompany",
+    email: "admin@yourcompany.com",
+    apiToken: "YOUR_API_TOKEN"
+  }
+});
+```
+
+### Features
+
+#### Ticket Creation
+
+```javascript
+// Create ticket from conversation
+await zendesk.createTicket({
+  subject: "Customer Inquiry",
+  description: conversationTranscript,
+  priority: "high",
+  status: "open",
+  tags: ["chatbot", "inquiry"],
+  customFields: {
+    conversation_id: "conv_123"
+  }
+});
+```
+
+#### User Sync
+
+```javascript
+// Sync user data
+await zendesk.createOrUpdateUser({
+  name: "John Doe",
+  email: "john@example.com",
+  phone: "+1234567890",
+  role: "end-user",
+  tags: ["vip", "chatbot_user"]
+});
+```
+
+## Universal CRM Features
+
+### Bi-directional Sync
+
+```javascript
+// Configure sync
+await crm.configurSync({
+  direction: "bidirectional",
+  frequency: "real-time",
+  entities: ["contacts", "activities", "notes"],
+  mapping: {
+    "articom.customer.email": "crm.contact.email",
+    "articom.customer.name": "crm.contact.name",
+    "articom.conversation.summary": "crm.activity.description"
+  }
+});
+```
+
+### Field Mapping
+
+```javascript
+const fieldMapping = {
+  contact: {
+    "customer.email": "contact.email",
+    "customer.firstName": "contact.first_name",
+    "customer.lastName": "contact.last_name",
+    "customer.phone": "contact.mobile"
+  },
+  activity: {
+    "conversation.summary": "activity.subject",
+    "conversation.transcript": "activity.description",
+    "conversation.startTime": "activity.date"
+  }
+};
+
+await crm.setFieldMapping(fieldMapping);
+```
+
+### Custom Objects
+
+```javascript
+// Create custom object
+await crm.createCustomObject({
+  objectType: "ChatConversation",
+  fields: {
+    conversation_id: "string",
+    agent_name: "string",
+    duration: "number",
+    satisfaction_score: "number",
+    resolved: "boolean"
+  }
+});
+```
+
+## Automation Workflows
+
+### Auto-create Lead
+
+```javascript
+articom.onEvent("conversation.completed", async (conversation) => {
+  if (conversation.tags.includes("sales_inquiry")) {
+    await crm.createLead({
+      name: conversation.customer.name,
+      email: conversation.customer.email,
+      source: "Chatbot",
+      status: "New",
+      notes: conversation.summary
+    });
+  }
+});
+```
+
+### Update Contact Timeline
+
+```javascript
+articom.onEvent("message.sent", async (message) => {
+  await crm.addTimelineEvent({
+    contactId: message.customerId,
+    eventType: "chat_message",
+    timestamp: message.timestamp,
+    description: message.text,
+    metadata: {
+      agent: message.agentId,
+      channel: message.channel
+    }
+  });
+});
+```
+
+### Sync Deal Stage
+
+```javascript
+articom.onEvent("deal.updated", async (event) => {
+  const conversation = await articom.getConversation(event.conversationId);
+  
+  await crm.updateDeal({
+    dealId: event.dealId,
+    stage: event.newStage,
+    lastActivity: new Date(),
+    notes: `Stage updated via Articom conversation`
+  });
+});
+```
+
+## Analytics & Reporting
+
+### CRM Insights
+
+```javascript
+const insights = await crm.getInsights({
+  period: "month",
+  metrics: [
+    "leads_created",
+    "deals_influenced",
+    "contacts_engaged",
+    "revenue_attributed"
+  ]
+});
+
+console.log({
+  leadsFromChat: insights.leadsCreated,
+  chatDealValue: insights.totalDealValue,
+  conversionRate: insights.conversionRate
+});
+```
+
+### Attribution Tracking
+
+```javascript
+// Track conversation influence on deals
+await crm.trackAttribution({
+  conversationId: "conv_123",
+  dealId: "deal_456",
+  attributionType: "influenced",
+  value: 5000,
+  touchpoint: "initial_inquiry"
+});
+```
+
+## Best Practices
+
+### 1. Data Hygiene
+- Validate data before syncing
+- Deduplicate contacts
+- Regular data audits
+
+### 2. Sync Strategy
+```javascript
+const syncStrategy = {
+  contacts: "real-time",
+  activities: "real-time",
+  deals: "every_15_minutes",
+  reports: "daily"
+};
+```
+
+### 3. Error Handling
+```javascript
+crm.onSyncError(async (error) => {
+  console.error("CRM sync failed:", error);
+  await notifyAdmin(error);
+  await retrySync(error.entityId);
+});
+```
+
+### 4. Privacy Compliance
+- Respect data retention policies
+- Handle deletion requests
+- Comply with GDPR/CCPA
+
+## API Reference
+
+### Connect CRM
+
+```javascript
+POST /v1/integrations/crm/connect
+{
+  "type": "salesforce",
+  "credentials": {...}
+}
+```
+
+### Sync Contact
+
+```javascript
+POST /v1/integrations/crm/contacts
+{
+  "email": "customer@example.com",
+  "data": {...}
+}
+```
+
+### Create Activity
+
+```javascript
+POST /v1/integrations/crm/activities
+{
+  "contactId": "contact_123",
+  "type": "chat",
+  "data": {...}
+}
+```
+
+## Troubleshooting
+
+**Sync Failures**
+- Check API credentials
+- Verify field mappings
+- Review error logs
+
+**Duplicate Records**
+- Configure deduplication rules
+- Use unique identifiers
+- Review matching logic
+
+**Permission Issues**
+- Verify API permissions
+- Check user roles
+- Review OAuth scopes
+
+## Next Steps
+
+<Cards>
+  <Card title="Automation" href="/docs/features/automation" />
+  <Card title="Analytics" href="/docs/features/analytics" />
+  <Card title="API Reference" href="/docs/api-reference" />
+</Cards>

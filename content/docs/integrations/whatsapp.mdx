@@ -1,0 +1,465 @@
+---
+title: WhatsApp Integration
+description: Connect your Articom agents with WhatsApp Business API
+---
+
+# WhatsApp Integration
+
+Integrate Articom with WhatsApp Business API to provide automated customer support and engage with customers on the world's most popular messaging platform.
+
+## Overview
+
+The WhatsApp integration enables you to:
+- Send and receive WhatsApp messages
+- Automate customer conversations
+- Handle rich media (images, videos, documents)
+- Use message templates for notifications
+- Track message delivery and read status
+
+## Prerequisites
+
+Before integrating WhatsApp, you need:
+
+1. **WhatsApp Business Account** - Sign up for WhatsApp Business API
+2. **Facebook Business Manager** - Create a business account
+3. **Phone Number** - Verified phone number for WhatsApp
+4. **Meta Developer Account** - Access to Meta Developer platform
+
+## Setup
+
+### Step 1: Get WhatsApp Credentials
+
+1. Go to [Meta Business Suite](https://business.facebook.com)
+2. Navigate to WhatsApp Business API settings
+3. Get your:
+   - Phone Number ID
+   - WhatsApp Business Account ID
+   - Access Token
+
+### Step 2: Connect to Articom
+
+```javascript
+const whatsapp = await articom.integrations.connect({
+  type: "whatsapp",
+  config: {
+    phoneNumberId: "YOUR_PHONE_NUMBER_ID",
+    wabaId: "YOUR_WABA_ID",
+    accessToken: "YOUR_ACCESS_TOKEN",
+    webhookVerifyToken: "YOUR_VERIFY_TOKEN"
+  }
+});
+```
+
+### Step 3: Configure Webhook
+
+Set up webhook to receive WhatsApp messages:
+
+```javascript
+const webhook = await whatsapp.setupWebhook({
+  url: "https://your-domain.com/webhooks/whatsapp",
+  events: [
+    "messages",
+    "message_status",
+    "message_reactions"
+  ]
+});
+```
+
+### Step 4: Verify Integration
+
+```javascript
+const status = await whatsapp.verify();
+console.log(status); // { connected: true, phoneNumber: "+1234567890" }
+```
+
+## Sending Messages
+
+### Text Messages
+
+```javascript
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "text",
+  text: {
+    body: "Hello! How can I help you today?"
+  }
+});
+```
+
+### Media Messages
+
+```javascript
+// Send image
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "image",
+  image: {
+    link: "https://example.com/image.jpg",
+    caption: "Check out our new product!"
+  }
+});
+
+// Send document
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "document",
+  document: {
+    link: "https://example.com/catalog.pdf",
+    filename: "Product Catalog.pdf"
+  }
+});
+```
+
+### Interactive Messages
+
+```javascript
+// Button message
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "interactive",
+  interactive: {
+    type: "button",
+    body: {
+      text: "Would you like to know more?"
+    },
+    action: {
+      buttons: [
+        { type: "reply", reply: { id: "yes", title: "Yes" } },
+        { type: "reply", reply: { id: "no", title: "No" } }
+      ]
+    }
+  }
+});
+
+// List message
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "interactive",
+  interactive: {
+    type: "list",
+    header: { text: "Choose a department" },
+    body: { text: "How can we help you?" },
+    action: {
+      button: "View Options",
+      sections: [
+        {
+          title: "Support",
+          rows: [
+            { id: "tech", title: "Technical Support" },
+            { id: "billing", title: "Billing Questions" }
+          ]
+        }
+      ]
+    }
+  }
+});
+```
+
+## Message Templates
+
+### Create Template
+
+```javascript
+const template = await whatsapp.createTemplate({
+  name: "order_confirmation",
+  language: "en_US",
+  category: "TRANSACTIONAL",
+  components: [
+    {
+      type: "HEADER",
+      format: "TEXT",
+      text: "Order Confirmed!"
+    },
+    {
+      type: "BODY",
+      text: "Your order {{1}} has been confirmed. Expected delivery: {{2}}"
+    },
+    {
+      type: "FOOTER",
+      text: "Thank you for shopping with us"
+    }
+  ]
+});
+```
+
+### Send Template Message
+
+```javascript
+await whatsapp.sendTemplate({
+  to: "+1234567890",
+  template: {
+    name: "order_confirmation",
+    language: { code: "en_US" },
+    components: [
+      {
+        type: "body",
+        parameters: [
+          { type: "text", text: "#12345" },
+          { type: "text", text: "Nov 25, 2025" }
+        ]
+      }
+    ]
+  }
+});
+```
+
+## Receiving Messages
+
+### Handle Incoming Messages
+
+```javascript
+whatsapp.onMessage(async (message) => {
+  console.log({
+    from: message.from,
+    type: message.type,
+    text: message.text?.body,
+    timestamp: message.timestamp
+  });
+
+  // Process with AI agent
+  const response = await agent.processMessage({
+    text: message.text.body,
+    userId: message.from,
+    channel: "whatsapp"
+  });
+
+  // Send response
+  await whatsapp.sendMessage({
+    to: message.from,
+    type: "text",
+    text: { body: response.text }
+  });
+});
+```
+
+### Handle Message Status
+
+```javascript
+whatsapp.onStatus((status) => {
+  console.log({
+    messageId: status.id,
+    status: status.status, // sent, delivered, read
+    timestamp: status.timestamp
+  });
+});
+```
+
+## Features
+
+### Rich Media Support
+
+```javascript
+// Send location
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "location",
+  location: {
+    latitude: 37.7749,
+    longitude: -122.4194,
+    name: "Our Store",
+    address: "123 Main St, San Francisco, CA"
+  }
+});
+
+// Send contact
+await whatsapp.sendMessage({
+  to: "+1234567890",
+  type: "contacts",
+  contacts: [{
+    name: { formatted_name: "John Doe" },
+    phones: [{ phone: "+1234567890", type: "WORK" }],
+    emails: [{ email: "john@example.com", type: "WORK" }]
+  }]
+});
+```
+
+### Message Reactions
+
+```javascript
+// React to a message
+await whatsapp.reactToMessage({
+  messageId: "wamid.xxx",
+  emoji: "👍"
+});
+```
+
+### Read Receipts
+
+```javascript
+// Mark message as read
+await whatsapp.markAsRead({
+  messageId: "wamid.xxx"
+});
+```
+
+## Advanced Features
+
+### Business Profile
+
+```javascript
+// Update business profile
+await whatsapp.updateProfile({
+  about: "24/7 Customer Support",
+  description: "We're here to help you!",
+  email: "support@company.com",
+  websites: ["https://company.com"],
+  vertical: "RETAIL",
+  address: "123 Main St, San Francisco, CA 94102"
+});
+```
+
+### Phone Number Settings
+
+```javascript
+// Configure phone number
+await whatsapp.configurePhone({
+  pin: "123456",
+  about: "Customer Support Line",
+  photoUrl: "https://company.com/logo.jpg"
+});
+```
+
+## Agent Integration
+
+### Connect Agent to WhatsApp
+
+```javascript
+const agent = await articom.agents.get("agent_123");
+
+await agent.addChannel({
+  type: "whatsapp",
+  config: {
+    phoneNumberId: "YOUR_PHONE_NUMBER_ID",
+    autoRespond: true,
+    businessHours: {
+      enabled: true,
+      schedule: {
+        monday: { start: "09:00", end: "17:00" },
+        // ... other days
+      }
+    }
+  }
+});
+```
+
+### Auto-responses
+
+```javascript
+agent.setAutoResponses({
+  greeting: {
+    enabled: true,
+    message: "Hi! I'm your AI assistant. How can I help you today?"
+  },
+  away: {
+    enabled: true,
+    message: "We're currently offline. We'll respond when we're back!",
+    triggers: ["outside_business_hours"]
+  }
+});
+```
+
+## Analytics
+
+### Track WhatsApp Metrics
+
+```javascript
+const analytics = await whatsapp.getAnalytics({
+  period: "last_30_days",
+  metrics: [
+    "messages_sent",
+    "messages_received",
+    "message_delivered_rate",
+    "message_read_rate",
+    "response_time"
+  ]
+});
+
+console.log({
+  sent: analytics.messagesSent,
+  received: analytics.messagesReceived,
+  deliveryRate: analytics.deliveredRate,
+  avgResponseTime: analytics.avgResponseTime
+});
+```
+
+## Best Practices
+
+### 1. Message Templates
+Use approved templates for proactive notifications to avoid account restrictions.
+
+### 2. 24-Hour Window
+Respond to user messages within 24 hours to maintain free messaging window.
+
+### 3. Opt-in Required
+Ensure users have opted in to receive WhatsApp messages.
+
+### 4. Rich Media
+Use images, videos, and interactive buttons to enhance engagement.
+
+### 5. Business Profile
+Complete your business profile for better trust and recognition.
+
+## Rate Limits
+
+WhatsApp has the following limits:
+- **Messaging**: Based on your tier (1K, 10K, 100K, unlimited)
+- **Templates**: Submit for approval before use
+- **Media**: Max 5MB for images, 16MB for documents
+
+## Compliance
+
+### GDPR Compliance
+```javascript
+// Handle data deletion request
+await whatsapp.deleteUserData({
+  phoneNumber: "+1234567890",
+  reason: "user_request"
+});
+```
+
+### Opt-out Management
+```javascript
+// Handle opt-out
+whatsapp.onMessage(async (message) => {
+  if (message.text.body.toLowerCase() === "stop") {
+    await unsubscribeUser(message.from);
+    await whatsapp.sendMessage({
+      to: message.from,
+      text: { body: "You have been unsubscribed." }
+    });
+  }
+});
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Message Not Delivered**
+- Check phone number format (E.164)
+- Verify user has WhatsApp account
+- Ensure within 24-hour window or using approved template
+
+**Webhook Not Receiving**
+- Verify webhook URL is publicly accessible
+- Check webhook verify token matches
+- Ensure HTTPS is enabled
+
+**Template Rejected**
+- Follow template guidelines
+- Avoid promotional language
+- Include opt-out instructions
+
+## Support
+
+- **WhatsApp Business API Docs**: https://developers.facebook.com/docs/whatsapp
+- **Articom Support**: support@articom.io
+- **Community Forum**: community.articom.io
+
+## Next Steps
+
+<Cards>
+  <Card title="Messenger" href="/docs/integrations/messenger" />
+  <Card title="Instagram" href="/docs/integrations/instagram" />
+  <Card title="Slack" href="/docs/integrations/slack" />
+</Cards>

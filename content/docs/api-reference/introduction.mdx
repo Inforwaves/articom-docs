@@ -1,0 +1,146 @@
+---
+title: API Introduction
+description: Getting started with the Articom API
+---
+
+# API Introduction
+
+Welcome to the Articom API documentation. This API allows you to integrate Articom's powerful agent capabilities into your applications.
+
+## Overview
+
+The Articom API is organized around REST principles. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+
+## Base URL
+
+```
+https://api.articom.io/v1
+```
+
+## API Endpoints
+
+The API provides the following main endpoints:
+
+- **Authentication** - Manage API keys and tokens
+- **Agents** - Create and manage AI agents
+- **Conversations** - Handle chat interactions
+- **Analytics** - Access usage and performance metrics
+
+## Quick Start
+
+### 1. Get Your API Key
+
+Sign up for an account and generate an API key from the dashboard:
+
+```bash
+https://dashboard.articom.io/api-keys
+```
+
+### 2. Make Your First Request
+
+```bash
+curl https://api.articom.io/v1/agents \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+### 3. Create an Agent
+
+```bash
+curl https://api.articom.io/v1/agents \
+  -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Customer Support Agent",
+    "type": "support",
+    "configuration": {
+      "language": "en",
+      "personality": "helpful"
+    }
+  }'
+```
+
+## Response Format
+
+All API responses are returned in JSON format:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "agent_123",
+    "name": "Customer Support Agent",
+    "status": "active"
+  },
+  "meta": {
+    "timestamp": "2025-11-20T10:00:00Z"
+  }
+}
+```
+
+## Error Handling
+
+The API uses conventional HTTP response codes:
+
+- `200` - Success
+- `400` - Bad Request
+- `401` - Unauthorized
+- `403` - Forbidden
+- `404` - Not Found
+- `429` - Too Many Requests
+- `500` - Internal Server Error
+
+Error response format:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "invalid_request",
+    "message": "The request was invalid",
+    "details": {}
+  }
+}
+```
+
+## Rate Limiting
+
+API requests are rate limited based on your plan:
+
+- **Free**: 100 requests/hour
+- **Pro**: 1,000 requests/hour
+- **Enterprise**: Custom limits
+
+Rate limit headers:
+
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1605398400
+```
+
+## SDKs and Libraries
+
+Official SDKs available:
+
+- **JavaScript/TypeScript** - `npm install @articom/sdk`
+- **Python** - `pip install articom`
+- **Go** - `go get github.com/articom/articom-go`
+- **Ruby** - `gem install articom`
+
+## Support
+
+- Documentation: https://docs.articom.io
+- API Status: https://status.articom.io
+- Support: support@articom.io
+- Community: https://community.articom.io
+
+## Next Steps
+
+<Cards>
+  <Card title="Authentication" href="/docs/api-reference/authentication" />
+  <Card title="Create Agent" href="/docs/api-reference/endpoint/create" />
+  <Card title="Get Agent" href="/docs/api-reference/endpoint/get" />
+  <Card title="Webhooks" href="/docs/api-reference/endpoint/webhook" />
+</Cards>
