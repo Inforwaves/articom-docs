@@ -1,0 +1,53 @@
+name: Build and Push Docker Image to ACR
+
+on:
+  push:
+    branches:
+      - dev
+      - initial
+  release:
+    types: [published]
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: articom-docs
+  ACR_LOGIN_SERVER: ${{ secrets.ACR_NAME }}.azurecr.io
+
+jobs:
+ 
+  build-dev:
+    name: Build and Push Dev Docker Image to ACR
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'dev' && github.event_name == 'push'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        run: az acr login --name ${{ secrets.ACR_NAME }}
+
+      - name: Build and Push Docker Image 
+        run: |
+          IMAGE_TAG=prod
+          echo "🔧 Building image: $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG"
+          docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG .
+          docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG
+          echo "✅ Prod image pushed successfully to ACR"
+      - name: Force rollout restart
+        run: |
+          echo "🔁 Triggering rollout restart for articom-docs in prod namespace..."
+          az aks get-credentials --resource-group articom-production --name articom-aks-cluster --overwrite-existing
+          kubectl rollout restart deployment articom-docs -n prod
+          echo "✅ Rollout restart triggered successfully"
+
+  
+ 

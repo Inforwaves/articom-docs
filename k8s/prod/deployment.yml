@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: articom-docs
+  namespace: docs
+  labels:
+    app: articom-docs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: articom-docs
+  template:
+    metadata:
+      labels:
+        app: articom-docs
+    spec:
+      containers:
+        - name: articom-docs
+          image: articomacr.azurecr.io/articom-docs:prod
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: ENVIRONMENT
+              value: "prod"
+          
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
