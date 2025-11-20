@@ -1,0 +1,215 @@
+---
+title: "CRM Integration"
+description: "Connect with Salesforce, HubSpot, and Dynamics 365 for unified customer data"
+icon: "database"
+---
+
+## Overview
+
+Articom integrates seamlessly with leading CRM platforms to provide a unified view of customer interactions. Sync conversation history, update records automatically, and deliver personalized support based on CRM data.
+
+## Supported CRM Platforms
+
+<CardGroup cols={3}>
+  <Card title="Salesforce" icon="salesforce">
+    Full Salesforce integration with bi-directional sync
+  </Card>
+  <Card title="HubSpot" icon="hubspot">
+    HubSpot CRM and Marketing Hub integration
+  </Card>
+  <Card title="Dynamics 365" icon="microsoft">
+    Microsoft Dynamics 365 enterprise integration
+  </Card>
+</CardGroup>
+
+## Integration Benefits
+
+### Unified Customer View
+- Complete conversation history in CRM
+- Customer sentiment analysis
+- Interaction timeline
+- Support ticket linkage
+
+### Automated Data Sync
+- Real-time contact updates
+- Automatic lead creation
+- Deal/opportunity tracking
+- Custom field mapping
+
+### Personalized Support
+```plaintext
+Customer: "Hi, I need help"
+Agent: [Checks CRM] "Hello Sarah! I see you're a Premium customer since 2023.  
+       How can I assist you today?"
+```
+
+## Salesforce Integration
+
+### Features
+- **Contact & Lead Sync**: Automatic contact creation and updates
+- **Case Management**: Create and update support cases
+- **Activity Logging**: Log all conversations as activities
+- **Custom Objects**: Support for custom Salesforce objects
+- **Workflows**: Trigger Salesforce workflows from conversations
+
+### Setup
+<Steps>
+  <Step title="Salesforce Admin Access">
+    Ensure you have Salesforce admin permissions
+  </Step>
+  <Step title="Install Articom App">
+    Install Articom from Salesforce AppExchange
+  </Step>
+  <Step title="Authenticate">
+    Connect Articom to your Salesforce org
+  </Step>
+  <Step title="Field Mapping">
+    Map conversation data to Salesforce fields
+  </Step>
+  <Step title="Configure Rules">
+    Set up sync rules and automation
+  </Step>
+</Steps>
+
+## HubSpot Integration
+
+### Features
+- **Contact Synchronization**: Two-way contact sync
+- **Deal Tracking**: Update deal stages based on conversations
+- **Ticket Creation**: Automatic support ticket generation
+- **Email Integration**: Link conversations to email threads
+- **Custom Properties**: Map to HubSpot custom properties
+
+### Data Flow
+```plaintext
+Customer Message → Articom AI → Response Sent
+                       ↓
+                   HubSpot CRM
+                       ↓
+          Contact Updated | Ticket Created | Deal Progressed
+```
+
+## Microsoft Dynamics 365 Integration
+
+### Features
+- **Account & Contact Management**: Sync customer records
+- **Case Tracking**: Integrate with Dynamics case management
+- **Sales Integration**: Connect with Dynamics Sales
+- **Custom Entities**: Support for custom entity types
+- **Power Automate**: Trigger flows from conversations
+
+### Enterprise Capabilities
+- Advanced security and compliance
+- Role-based access control
+- Audit trail and logging
+- Multi-region support
+
+## Configuration Options
+
+<AccordionGroup>
+  <Accordion title="Field Mapping">
+    Map conversation data to CRM fields:
+    - Customer name → Contact Name
+    - Email → Contact Email
+    - Phone → Contact Phone
+    - Conversation topic → Case Subject
+    - Sentiment → Custom Sentiment Field
+  </Accordion>
+  
+  <Accordion title="Sync Rules">
+    Define when and what to sync:
+    - Create contact on first conversation
+    - Update contact on subsequent chats
+    - Create case for unresolved issues
+    - Log all conversations as activities
+  </Accordion>
+  
+  <Accordion title="Automation Triggers">
+    Set up automated actions:
+    - Send email when deal closes
+    - Assign to sales rep based on topic
+    - Create task for follow-up
+    - Update opportunity stage
+  </Accordion>
+</AccordionGroup>
+
+## Analytics & Reporting
+
+Track CRM-integrated metrics:
+- **Lead Conversion**: Conversations leading to leads
+- **Deal Influence**: Support impact on deal closing
+- **Customer Health**: Sentiment trends per account
+- **Support Efficiency**: Case resolution times
+
+## Use Cases
+
+### Sales Enablement
+- Qualify leads through conversations
+- Schedule sales calls automatically
+- Provide product information
+- Track deal progression
+
+### Customer Success
+- Proactive outreach based on CRM data
+- Renewal reminders
+- Upsell opportunities
+- Health score monitoring
+
+### Support Operations
+- Automatic case creation
+- Priority routing based on account tier
+- SLA tracking
+- Escalation management
+
+## Best Practices
+
+<Note>
+  **Tip**: Start with basic contact sync, then gradually add more complex automations as you get comfortable with the integration.
+</Note>
+
+1. **Clean CRM Data**: Ensure CRM data is clean before integration
+2. **Test Thoroughly**: Use sandbox/test environment first
+3. **Monitor Sync**: Regularly check sync logs for errors
+4. **User Training**: Train team on integrated workflows
+5. **Regular Reviews**: Monthly review of automation rules
+
+## Security & Compliance
+
+- **Data Encryption**: All data encrypted in transit and at rest
+- **GDPR Compliant**: Full GDPR compliance for EU customers
+- **SOC 2 Certified**: Enterprise-grade security standards
+- **Role-Based Access**: Granular permission controls
+- **Audit Logs**: Complete audit trail of all actions
+
+## Getting Started
+
+<Steps>
+  <Step title="Choose Your CRM">
+    Select which CRM platform you use
+  </Step>
+  <Step title="Review Requirements">
+    Check admin access and permissions needed
+  </Step>
+  <Step title="Follow Setup Guide">
+    Use platform-specific setup instructions
+  </Step>
+  <Step title="Test Integration">
+    Verify data flow with test conversations
+  </Step>
+  <Step title="Go Live">
+    Activate for production use
+  </Step>
+</Steps>
+
+## Support
+
+Need help with CRM integration?
+
+<CardGroup cols={2}>
+  <Card title="Integration Docs" icon="book" href="/api-reference/introduction">
+    Detailed API documentation
+  </Card>
+  <Card title="Contact Support" icon="headset" href="mailto:support@articom.io">
+    Get personalized integration assistance
+  </Card>
+</CardGroup>

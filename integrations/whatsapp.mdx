@@ -1,0 +1,92 @@
+---
+title: "WhatsApp Integration"
+description: "Connect WhatsApp Business API for automated customer support"
+icon: "whatsapp"
+---
+
+## Overview
+
+Integrate Articom with WhatsApp Business API to provide automated customer support through the world's most popular messaging app. Handle inquiries, send notifications, and engage customers where they already are.
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="Automated Responses" icon="robot">
+    AI-powered replies to customer messages
+  </Card>
+  <Card title="Rich Media" icon="image">
+    Send images, documents, and location data
+  </Card>
+  <Card title="Quick Replies" icon="bolt">
+    Interactive buttons and list messages
+  </Card>
+  <Card title="Notifications" icon="bell">
+    Proactive updates and reminders
+  </Card>
+</CardGroup>
+
+## Setup Guide
+
+<Steps>
+  <Step title="WhatsApp Business Account">
+    Create a WhatsApp Business account if you don't have one
+  </Step>
+  <Step title="Facebook Business Manager">
+    Set up Facebook Business Manager and verify your business
+  </Step>
+  <Step title="Connect to Articom">
+    In Articom dashboard, go to Integrations → WhatsApp → Connect
+  </Step>
+  <Step title="Configure">
+    Set up welcome messages and automated responses
+  </Step>
+  <Step title="Test">
+    Send a test message to verify the integration
+  </Step>
+</Steps>
+
+## Capabilities
+
+### Message Types
+- Text messages with formatting
+- Images and videos
+- Documents (PDF, DOC, etc.)
+- Location sharing
+- Contact cards
+- Interactive buttons
+- List messages
+
+### Automation Rules
+```plaintext
+Trigger: Customer sends "Hi"
+Action: Send welcome message with menu options
+
+Trigger: Customer asks about hours
+Action: Send business hours and location
+
+Trigger: Keyword "order status"
+Action: Request order number and provide tracking
+```
+
+## Best Practices
+
+<Warning>
+  WhatsApp has strict policies against spam. Only send messages to customers who have opted in.
+</Warning>
+
+- Respond within 24 hours to maintain quality
+- Use templates for notifications
+- Keep messages conversational
+- Respect WhatsApp's commerce policies
+
+## Use Cases
+
+- Customer support and FAQs
+- Order confirmations and tracking
+- Appointment reminders
+- Product recommendations
+- Feedback collection
+
+<Card title="Get Started" icon="rocket" href="/quickstart">
+  Set up WhatsApp integration
+</Card>
