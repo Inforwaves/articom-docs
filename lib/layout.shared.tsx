@@ -1,12 +1,26 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { BookOpen, Github, MessageSquare, Zap } from 'lucide-react';
+import Image from 'next/image';
 
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
       title: (
         <span className="flex items-center gap-2 font-bold">
-          <span className="gradient-text text-xl">Articom AI</span>
+          <Image 
+            src="/articom.png" 
+            alt="Articom AI" 
+            width={120} 
+            height={32}
+            className="dark:hidden"
+          />
+          <Image 
+            src="/articom.png" 
+            alt="Articom AI" 
+            width={120} 
+            height={32}
+            className="hidden dark:block"
+          />
         </span>
       ),
       transparentMode: 'top',
