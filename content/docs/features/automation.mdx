@@ -1,0 +1,552 @@
+---
+title: Automation
+description: Streamline workflows with intelligent automation
+---
+
+# Automation
+
+Automate repetitive tasks, workflows, and business processes with intelligent automation powered by AI agents.
+
+## Overview
+
+Articom's automation features enable businesses to streamline operations, reduce manual work, and improve efficiency by automating routine tasks and complex workflows.
+
+## Key Features
+
+### Workflow Automation
+- **Visual Workflow Builder**: Drag-and-drop interface for creating workflows
+- **Conditional Logic**: Decision trees and branching paths
+- **Multi-step Processes**: Complex workflows with multiple stages
+- **Parallel Execution**: Run multiple tasks simultaneously
+
+### Trigger-based Automation
+
+#### Event Triggers
+
+```javascript
+const automation = articom.createAutomation({
+  name: "New Customer Onboarding",
+  trigger: {
+    type: "event",
+    event: "customer.created"
+  },
+  actions: [
+    { type: "send_welcome_email" },
+    { type: "create_support_ticket" },
+    { type: "assign_account_manager" },
+    { type: "schedule_onboarding_call" }
+  ]
+});
+```
+
+#### Schedule Triggers
+
+```javascript
+const scheduledAutomation = articom.createAutomation({
+  name: "Daily Report Generation",
+  trigger: {
+    type: "schedule",
+    cron: "0 9 * * *", // Every day at 9 AM
+    timezone: "America/New_York"
+  },
+  actions: [
+    { type: "generate_report", template: "daily_summary" },
+    { type: "send_email", recipients: ["team@company.com"] }
+  ]
+});
+```
+
+#### Webhook Triggers
+
+```javascript
+const webhookAutomation = articom.createAutomation({
+  name: "Process Payment",
+  trigger: {
+    type: "webhook",
+    url: "/webhooks/payment-received"
+  },
+  actions: [
+    { type: "verify_payment" },
+    { type: "update_order_status" },
+    { type: "send_confirmation" },
+    { type: "notify_fulfillment_team" }
+  ]
+});
+```
+
+## Automation Types
+
+### Customer Service Automation
+
+#### Auto-Response
+
+```javascript
+const autoResponse = {
+  trigger: "message_received",
+  conditions: {
+    businessHours: false,
+    priority: "low"
+  },
+  action: {
+    type: "send_message",
+    message: "Thanks for contacting us! We'll respond within 24 hours.",
+    followUp: "create_ticket"
+  }
+};
+```
+
+#### Ticket Routing
+
+```javascript
+const ticketRouting = {
+  trigger: "ticket_created",
+  rules: [
+    {
+      if: { category: "technical", priority: "high" },
+      then: { assignTo: "tech_team", notify: "immediate" }
+    },
+    {
+      if: { category: "billing" },
+      then: { assignTo: "billing_team", sla: "24 hours" }
+    },
+    {
+      if: { sentiment: "negative" },
+      then: { escalate: true, assignTo: "supervisor" }
+    }
+  ]
+};
+```
+
+### Marketing Automation
+
+#### Lead Nurturing
+
+```javascript
+const leadNurturing = articom.createAutomation({
+  name: "Lead Nurture Campaign",
+  trigger: {
+    type: "lead_captured"
+  },
+  workflow: [
+    {
+      delay: "1 hour",
+      action: "send_welcome_email"
+    },
+    {
+      delay: "3 days",
+      action: "send_product_guide",
+      condition: { emailOpened: true }
+    },
+    {
+      delay: "7 days",
+      action: "offer_demo",
+      condition: { guideDownloaded: true }
+    },
+    {
+      delay: "14 days",
+      action: "assign_to_sales",
+      condition: { engagementScore: { min: 50 } }
+    }
+  ]
+});
+```
+
+#### Campaign Management
+
+```javascript
+const campaign = {
+  trigger: "campaign_start",
+  segments: ["engaged_users", "trial_users"],
+  actions: [
+    { type: "personalize_content" },
+    { type: "send_campaign", channel: ["email", "sms"] },
+    { type: "track_engagement" },
+    { type: "follow_up_based_on_response" }
+  ]
+};
+```
+
+### Sales Automation
+
+#### Lead Qualification
+
+```javascript
+const leadQualification = {
+  trigger: "lead_form_submitted",
+  scoring: {
+    company_size: { "1-10": 5, "11-50": 10, "51+": 20 },
+    budget: { "low": 5, "medium": 15, "high": 25 },
+    timeline: { "immediate": 30, "3_months": 15, "6_months": 5 }
+  },
+  actions: [
+    {
+      if: { score: { min: 50 } },
+      then: "assign_to_sales_rep"
+    },
+    {
+      if: { score: { max: 49 } },
+      then: "add_to_nurture_campaign"
+    }
+  ]
+};
+```
+
+#### Follow-up Sequences
+
+```javascript
+const followUpSequence = {
+  trigger: "demo_completed",
+  sequence: [
+    {
+      delay: "1 day",
+      action: "send_thank_you_email"
+    },
+    {
+      delay: "3 days",
+      action: "send_case_studies",
+      condition: { emailOpened: true }
+    },
+    {
+      delay: "7 days",
+      action: "schedule_call",
+      condition: { noResponse: true }
+    }
+  ]
+};
+```
+
+### Operations Automation
+
+#### Data Synchronization
+
+```javascript
+const dataSync = articom.createAutomation({
+  name: "CRM Data Sync",
+  trigger: {
+    type: "schedule",
+    interval: "15 minutes"
+  },
+  actions: [
+    { type: "fetch_data", source: "articom" },
+    { type: "transform_data", mapping: crmFieldMapping },
+    { type: "upsert_data", destination: "salesforce" },
+    { type: "log_sync_status" }
+  ]
+});
+```
+
+#### Reporting Automation
+
+```javascript
+const reportAutomation = {
+  name: "Weekly Performance Report",
+  trigger: {
+    type: "schedule",
+    cron: "0 9 * * MON"
+  },
+  actions: [
+    { type: "collect_metrics", period: "last_7_days" },
+    { type: "generate_charts" },
+    { type: "compile_report", format: "pdf" },
+    { type: "distribute_report", channels: ["email", "slack"] }
+  ]
+};
+```
+
+## Advanced Automation
+
+### Conditional Workflows
+
+```javascript
+const conditionalWorkflow = {
+  trigger: "order_placed",
+  workflow: [
+    {
+      condition: { orderValue: { min: 1000 } },
+      actions: [
+        "apply_vip_benefits",
+        "assign_dedicated_support",
+        "expedite_shipping"
+      ]
+    },
+    {
+      condition: { isFirstOrder: true },
+      actions: [
+        "send_welcome_package",
+        "offer_loyalty_program",
+        "request_feedback"
+      ]
+    },
+    {
+      default: [
+        "send_confirmation",
+        "schedule_delivery"
+      ]
+    }
+  ]
+};
+```
+
+### Multi-channel Orchestration
+
+```javascript
+const multiChannelCampaign = {
+  trigger: "cart_abandoned",
+  channels: [
+    {
+      channel: "email",
+      delay: "1 hour",
+      template: "cart_reminder_email"
+    },
+    {
+      channel: "sms",
+      delay: "6 hours",
+      condition: { emailNotOpened: true },
+      message: "Complete your purchase and get 10% off!"
+    },
+    {
+      channel: "push_notification",
+      delay: "24 hours",
+      condition: { notConverted: true },
+      message: "Your items are waiting!"
+    }
+  ]
+};
+```
+
+### AI-Powered Automation
+
+```javascript
+const aiAutomation = {
+  trigger: "customer_inquiry",
+  workflow: [
+    {
+      action: "analyze_intent",
+      aiModel: "intent_classifier"
+    },
+    {
+      action: "sentiment_analysis",
+      aiModel: "sentiment_detector"
+    },
+    {
+      action: "route_intelligently",
+      rules: [
+        {
+          if: { intent: "urgent", sentiment: "negative" },
+          then: "escalate_to_human"
+        },
+        {
+          if: { intent: "simple_query" },
+          then: "automate_response"
+        }
+      ]
+    }
+  ]
+};
+```
+
+## Integration Automations
+
+### CRM Integration
+
+```javascript
+const crmAutomation = articom.createAutomation({
+  name: "Update CRM on Conversation",
+  trigger: { type: "conversation_ended" },
+  actions: [
+    {
+      type: "update_crm",
+      system: "salesforce",
+      action: "create_activity",
+      data: {
+        subject: "Customer Support Conversation",
+        description: "{{conversation_summary}}",
+        relatedTo: "{{contact_id}}"
+      }
+    }
+  ]
+});
+```
+
+### Slack Integration
+
+```javascript
+const slackNotification = {
+  trigger: "high_priority_ticket",
+  actions: [
+    {
+      type: "post_to_slack",
+      channel: "#support-urgent",
+      message: "🚨 High priority ticket: {{ticket_subject}}",
+      attachments: [
+        {
+          title: "Customer: {{customer_name}}",
+          text: "{{ticket_description}}",
+          actions: ["Claim", "Escalate"]
+        }
+      ]
+    }
+  ]
+};
+```
+
+## Workflow Builder
+
+### Visual Designer
+
+```javascript
+const visualWorkflow = {
+  nodes: [
+    {
+      id: "start",
+      type: "trigger",
+      config: { event: "form_submitted" }
+    },
+    {
+      id: "validate",
+      type: "condition",
+      config: { field: "email", operator: "is_valid" }
+    },
+    {
+      id: "send_email",
+      type: "action",
+      config: { template: "welcome_email" }
+    },
+    {
+      id: "create_contact",
+      type: "action",
+      config: { system: "crm" }
+    }
+  ],
+  edges: [
+    { from: "start", to: "validate" },
+    { from: "validate", to: "send_email", condition: "true" },
+    { from: "send_email", to: "create_contact" }
+  ]
+};
+```
+
+## Monitoring & Management
+
+### Automation Analytics
+
+```javascript
+const automationStats = await automation.getStats();
+
+console.log({
+  totalRuns: automationStats.runs,
+  successRate: automationStats.successRate,
+  avgExecutionTime: automationStats.avgTime,
+  failureReasons: automationStats.errors,
+  costSavings: automationStats.estimatedSavings
+});
+```
+
+### Error Handling
+
+```javascript
+const errorHandling = {
+  onError: "retry",
+  retryConfig: {
+    maxAttempts: 3,
+    backoff: "exponential",
+    delay: 1000 // ms
+  },
+  fallback: {
+    action: "notify_admin",
+    pauseAutomation: true
+  }
+};
+```
+
+### Audit Logs
+
+```javascript
+const logs = await automation.getLogs({
+  startDate: "2025-11-01",
+  endDate: "2025-11-20",
+  status: ["success", "failed"],
+  limit: 100
+});
+```
+
+## Best Practices
+
+### 1. Start Simple
+Begin with simple automations and gradually increase complexity.
+
+### 2. Test Thoroughly
+```javascript
+// Test automation in sandbox environment
+automation.test({
+  environment: "sandbox",
+  mockData: testScenarios
+});
+```
+
+### 3. Monitor Performance
+```javascript
+// Set up monitoring
+automation.monitor({
+  alerts: {
+    failureRate: { threshold: 0.05 },
+    executionTime: { threshold: 5000 }
+  }
+});
+```
+
+### 4. Document Workflows
+Maintain clear documentation of automation logic and dependencies.
+
+### 5. Regular Review
+Periodically review and optimize automations based on performance data.
+
+## Use Cases
+
+### Customer Onboarding
+Automate welcome sequences, account setup, and initial training.
+
+### Support Ticket Management
+Auto-categorize, route, and prioritize support tickets.
+
+### Lead Management
+Score leads, nurture prospects, and hand off to sales.
+
+### Data Management
+Sync data across systems, validate inputs, and maintain consistency.
+
+### Reporting & Analytics
+Generate and distribute reports automatically.
+
+### Compliance & Governance
+Ensure processes follow regulatory requirements.
+
+## API Reference
+
+### Create Automation
+
+```javascript
+POST /v1/automations
+{
+  "name": "My Automation",
+  "trigger": { "type": "event", "event": "user.created" },
+  "actions": [...]
+}
+```
+
+### Execute Automation
+
+```javascript
+POST /v1/automations/{automation_id}/execute
+{
+  "context": { "userId": "user_123" }
+}
+```
+
+## Next Steps
+
+<Cards>
+  <Card title="Analytics" href="/docs/features/analytics" />
+  <Card title="Integrations" href="/docs/integrations" />
+  <Card title="API Reference" href="/docs/api-reference" />
+</Cards>

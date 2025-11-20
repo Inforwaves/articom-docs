@@ -1,0 +1,392 @@
+---
+title: Voice Agents
+description: Deploy AI-powered voice agents for phone and voice interactions
+---
+
+# Voice Agents
+
+Create intelligent voice agents that handle phone calls and voice interactions with natural speech recognition and text-to-speech capabilities.
+
+## Overview
+
+Articom's Voice Agents enable businesses to automate phone support, conduct voice surveys, and provide voice-based customer service with human-like conversations.
+
+## Key Features
+
+### Speech Recognition
+- **Real-time Transcription**: Convert speech to text instantly
+- **Multi-language Support**: Support for 50+ languages
+- **Accent Recognition**: Understand various accents and dialects
+- **Noise Cancellation**: Filter background noise for clarity
+
+### Natural Voice Synthesis
+- **Human-like Voices**: Natural, conversational voice output
+- **Custom Voice Branding**: Train custom voices for your brand
+- **Emotion & Tone**: Adjust voice emotion and speaking style
+- **Speech Rate Control**: Customize speaking speed
+
+### Conversation Management
+
+#### Call Flow Design
+Design voice conversation flows:
+
+```javascript
+const callFlow = {
+  greeting: {
+    message: "Thank you for calling. How can I help you today?",
+    listen: true,
+    timeout: 5000
+  },
+  intent_routing: {
+    intents: {
+      "account_balance": "handle_balance_inquiry",
+      "make_payment": "handle_payment",
+      "speak_agent": "transfer_to_human"
+    }
+  }
+};
+```
+
+#### Intent Recognition
+Understand caller intentions:
+
+```javascript
+const voiceIntent = await recognizeIntent(audioInput);
+
+if (voiceIntent.confidence > 0.8) {
+  executeAction(voiceIntent.action);
+} else {
+  clarifyIntent();
+}
+```
+
+## Voice Agent Types
+
+### Inbound Voice Agents
+
+#### Customer Support
+Handle incoming customer service calls:
+
+```javascript
+const supportAgent = {
+  greeting: "Thank you for calling support. Please describe your issue.",
+  capabilities: [
+    "account_lookup",
+    "troubleshooting",
+    "appointment_scheduling",
+    "human_transfer"
+  ]
+};
+```
+
+#### IVR (Interactive Voice Response)
+Automated menu navigation:
+
+```javascript
+const ivr = {
+  menu: {
+    message: "Press 1 for Sales, 2 for Support, 3 for Billing",
+    options: {
+      1: "sales_department",
+      2: "support_department",
+      3: "billing_department"
+    }
+  }
+};
+```
+
+### Outbound Voice Agents
+
+#### Appointment Reminders
+Automated reminder calls:
+
+```javascript
+const reminder = {
+  message: `Hi ${customer.name}, this is a reminder about your appointment tomorrow at ${appointment.time}. Press 1 to confirm or 2 to reschedule.`,
+  actions: {
+    1: "confirm_appointment",
+    2: "start_reschedule_flow"
+  }
+};
+```
+
+#### Surveys & Feedback
+Conduct voice surveys:
+
+```javascript
+const survey = {
+  questions: [
+    {
+      text: "On a scale of 1 to 5, how satisfied were you?",
+      type: "numeric",
+      range: [1, 5]
+    },
+    {
+      text: "Would you recommend us to others?",
+      type: "yes_no"
+    }
+  ]
+};
+```
+
+## Advanced Features
+
+### Voice Biometrics
+
+#### Speaker Identification
+Identify callers by voice:
+
+```javascript
+const voicePrint = await analyzeVoice(audioSample);
+const caller = await identifySpeaker(voicePrint);
+
+if (caller.authenticated) {
+  proceedWithSecureActions();
+}
+```
+
+#### Fraud Detection
+Detect suspicious call patterns:
+
+```javascript
+const fraudScore = await analyzeFraudRisk({
+  voicePattern: audioSample,
+  callerHistory: caller.history,
+  contextSignals: callMetadata
+});
+```
+
+### Sentiment Analysis
+
+Detect caller emotion in real-time:
+
+```javascript
+const sentiment = await analyzeSentiment(audioStream);
+
+if (sentiment.emotion === "frustrated") {
+  adjustTone("empathetic");
+  offerEscalation();
+}
+```
+
+### Call Recording & Transcription
+
+```javascript
+const callRecord = {
+  id: "call_123",
+  duration: 342, // seconds
+  transcript: "Full conversation transcript...",
+  summary: "Customer inquired about order status",
+  sentiment: "positive",
+  resolution: "resolved"
+};
+```
+
+## Implementation
+
+### Setup Voice Agent
+
+```javascript
+const voiceAgent = articom.createVoiceAgent({
+  name: "Customer Service Agent",
+  voice: {
+    provider: "google",
+    name: "en-US-Neural2-F",
+    rate: 1.0,
+    pitch: 0
+  },
+  language: "en-US",
+  features: {
+    recording: true,
+    transcription: true,
+    sentiment: true,
+    barge_in: true // Allow user to interrupt
+  }
+});
+```
+
+### Configure Speech Recognition
+
+```javascript
+voiceAgent.setSpeechConfig({
+  model: "enhanced",
+  profanityFilter: true,
+  enableAutomaticPunctuation: true,
+  speechContexts: [
+    {
+      phrases: ["account number", "order ID", "product name"]
+    }
+  ]
+});
+```
+
+### Handle Voice Intents
+
+```javascript
+voiceAgent.onIntent("check_balance", async (context) => {
+  const accountNumber = await extractEntity("account_number", context);
+  const balance = await getAccountBalance(accountNumber);
+  
+  return {
+    response: `Your current balance is $${balance.toFixed(2)}`,
+    action: "end_call"
+  };
+});
+```
+
+### Phone Number Integration
+
+```javascript
+const phoneNumber = await articom.provisionNumber({
+  country: "US",
+  type: "local",
+  area_code: "415"
+});
+
+phoneNumber.assignAgent(voiceAgent.id);
+```
+
+## Voice Quality Optimization
+
+### Audio Settings
+
+```javascript
+const audioConfig = {
+  sampleRate: 16000, // Hz
+  encoding: "LINEAR16",
+  channels: 1,
+  codec: "OPUS"
+};
+```
+
+### Latency Reduction
+
+```javascript
+voiceAgent.optimize({
+  streamingRecognition: true,
+  partialResults: true,
+  singleUtterance: false,
+  interimResults: true
+});
+```
+
+## Analytics & Monitoring
+
+### Call Metrics
+
+```javascript
+const callMetrics = {
+  totalCalls: 2450,
+  avgDuration: 186, // seconds
+  completionRate: 0.92,
+  transferRate: 0.08,
+  customerSatisfaction: 4.5,
+  firstCallResolution: 0.87
+};
+```
+
+### Performance Tracking
+
+```javascript
+const performance = {
+  speechRecognitionAccuracy: 0.96,
+  intentRecognitionAccuracy: 0.93,
+  avgLatency: 450, // ms
+  uptime: 0.999
+};
+```
+
+## Best Practices
+
+### 1. Clear Voice Prompts
+```javascript
+// Good: Clear and concise
+"Please say or press 1 for sales."
+
+// Avoid: Too verbose
+"If you would like to speak with someone in our sales department..."
+```
+
+### 2. Error Handling
+```javascript
+voiceAgent.onNoInput(() => {
+  attemptCount++;
+  if (attemptCount >= 3) {
+    return transferToHuman();
+  }
+  return "I didn't hear that. Could you please repeat?";
+});
+```
+
+### 3. Graceful Fallback
+```javascript
+if (intent.confidence < 0.7) {
+  return {
+    message: "Let me transfer you to someone who can help.",
+    action: "transfer_to_agent"
+  };
+}
+```
+
+### 4. Natural Conversations
+- Use conversational language
+- Avoid technical jargon
+- Provide clear next steps
+- Offer menu options when stuck
+
+## Use Cases
+
+### Customer Support Hotline
+24/7 automated phone support for common inquiries.
+
+### Appointment Scheduling
+Voice-based booking system for appointments and reservations.
+
+### Order Status & Tracking
+Automated order lookup and delivery updates.
+
+### Collections & Reminders
+Payment reminders and debt collection calls.
+
+### Emergency Services
+Automated emergency response and triage systems.
+
+### Voice Surveys
+Customer feedback and satisfaction surveys.
+
+## Integration
+
+### Telephony Providers
+
+```javascript
+// Twilio integration
+const twilioAgent = voiceAgent.integrate({
+  provider: "twilio",
+  accountSid: process.env.TWILIO_ACCOUNT_SID,
+  authToken: process.env.TWILIO_AUTH_TOKEN,
+  phoneNumber: "+14155551234"
+});
+
+// Vonage integration
+const vonageAgent = voiceAgent.integrate({
+  provider: "vonage",
+  apiKey: process.env.VONAGE_API_KEY,
+  apiSecret: process.env.VONAGE_API_SECRET
+});
+```
+
+## Pricing
+
+Voice agents are billed based on:
+- Minutes of voice interaction
+- Number of concurrent calls
+- Advanced features enabled
+- Phone number provisioning
+
+## Next Steps
+
+<Cards>
+  <Card title="Chatbot" href="/docs/features/chatbot" />
+  <Card title="Automation" href="/docs/features/automation" />
+  <Card title="Integrations" href="/docs/integrations" />
+</Cards>

@@ -1,0 +1,315 @@
+---
+title: Service Level Agreement
+description: Articom Service Level Agreement (SLA)
+---
+
+# Service Level Agreement (SLA)
+
+**Effective Date: November 20, 2025**
+
+## Overview
+
+This Service Level Agreement ("SLA") describes the uptime and support commitments that Articom provides to customers using our AI-powered customer engagement platform.
+
+## Definitions
+
+**"Service"** means the Articom platform and associated services as described in your subscription agreement.
+
+**"Uptime"** means the percentage of time the Service is available and operational during a calendar month.
+
+**"Downtime"** means any period when the Service is unavailable or not functioning as intended.
+
+**"Maintenance Window"** means scheduled maintenance periods announced at least 48 hours in advance.
+
+**"Service Credits"** means credits applied to your account as compensation for SLA breaches.
+
+## Service Availability
+
+### Uptime Commitment
+
+| Plan | Monthly Uptime Guarantee | Maximum Downtime/Month |
+|------|--------------------------|------------------------|
+| **Enterprise** | 99.99% | ~4 minutes |
+| **Professional** | 99.9% | ~43 minutes |
+| **Standard** | 99.5% | ~3.6 hours |
+| **Starter** | 99.0% | ~7.2 hours |
+
+### Uptime Calculation
+
+```
+Uptime % = (Total Minutes - Downtime Minutes) / Total Minutes × 100
+```
+
+**Excluded from Downtime:**
+- Scheduled maintenance windows
+- Issues caused by factors outside our control
+- Force majeure events
+- Customer's internet or network issues
+- Third-party service failures
+- Customer misuse or abuse
+
+## Response Time Commitments
+
+### Support Response Times
+
+| Priority | Enterprise | Professional | Standard | Starter |
+|----------|-----------|--------------|----------|---------|
+| **Critical** | 15 minutes | 30 minutes | 1 hour | 4 hours |
+| **High** | 1 hour | 2 hours | 4 hours | 8 hours |
+| **Medium** | 4 hours | 8 hours | 24 hours | 48 hours |
+| **Low** | 24 hours | 48 hours | 72 hours | 5 days |
+
+### Priority Definitions
+
+**Critical (P1)**
+- Complete service outage
+- Data loss or corruption
+- Security breach
+- Critical functionality unavailable
+
+**High (P2)**
+- Major feature not working
+- Significant performance degradation
+- Affects multiple users
+- No workaround available
+
+**Medium (P3)**
+- Minor feature issues
+- Intermittent problems
+- Affects limited users
+- Workaround available
+
+**Low (P4)**
+- Feature requests
+- General questions
+- Minor bugs
+- Documentation issues
+
+## Performance Commitments
+
+### API Performance
+
+| Metric | Commitment |
+|--------|-----------|
+| **API Response Time (P95)** | < 200ms |
+| **API Response Time (P99)** | < 500ms |
+| **Error Rate** | < 0.1% |
+| **Throughput** | 1000 requests/second |
+
+### Agent Response Time
+
+| Type | Commitment |
+|------|-----------|
+| **Chatbot Response** | < 1 second (P95) |
+| **Voice Agent Response** | < 500ms (P95) |
+| **Message Processing** | < 2 seconds (P95) |
+
+### Data Processing
+
+| Operation | Commitment |
+|-----------|-----------|
+| **Message Delivery** | < 5 seconds |
+| **Analytics Update** | Real-time (< 1 minute) |
+| **Report Generation** | < 10 minutes |
+| **Data Export** | < 1 hour |
+
+## Maintenance Windows
+
+### Scheduled Maintenance
+
+**Frequency:** Monthly  
+**Duration:** Maximum 4 hours  
+**Timing:** Outside business hours (typically 2 AM - 6 AM PST)  
+**Notice:** Minimum 48 hours advance notice
+
+**Emergency Maintenance**
+- Performed only for critical issues
+- Announced as soon as possible
+- Minimized to essential duration
+
+### Maintenance Communication
+
+We will notify you of scheduled maintenance via:
+- Email notification
+- Dashboard banner
+- Status page update
+- In-app notification
+
+## Service Credits
+
+### Credit Calculation
+
+If we fail to meet our uptime commitment, you are eligible for service credits:
+
+| Uptime Achieved | Service Credit |
+|-----------------|----------------|
+| < 99.99% to ≥ 99.9% | 10% of monthly fee |
+| < 99.9% to ≥ 99.0% | 25% of monthly fee |
+| < 99.0% | 50% of monthly fee |
+
+### Claiming Credits
+
+To receive service credits:
+
+1. **Submit Request:** Within 30 days of the incident
+2. **Provide Details:** Include dates, times, and impact description
+3. **Verification:** We will verify the claim within 10 business days
+4. **Application:** Credits applied to next billing cycle
+
+**Maximum Credit:** 50% of monthly subscription fee
+
+### Credit Limitations
+
+Service credits are:
+- Your sole remedy for SLA breaches
+- Not refundable for cash
+- Valid for 12 months from issuance
+- Applied automatically to future invoices
+
+## Monitoring and Reporting
+
+### Real-time Status
+
+**Status Page:** https://status.articom.io
+
+Monitor:
+- Current system status
+- Incident history
+- Scheduled maintenance
+- Performance metrics
+
+### Incident Reports
+
+After any incident causing downtime > 30 minutes, we provide:
+- Root cause analysis
+- Timeline of events
+- Resolution steps taken
+- Preventive measures
+
+### Monthly Reports
+
+Enterprise customers receive monthly reports including:
+- Uptime percentage
+- Performance metrics
+- Incident summary
+- Support statistics
+
+## Support Channels
+
+### Available Channels
+
+| Channel | Enterprise | Professional | Standard | Starter |
+|---------|-----------|--------------|----------|---------|
+| **24/7 Phone** | ✓ | ✓ | - | - |
+| **Email** | ✓ | ✓ | ✓ | ✓ |
+| **Live Chat** | ✓ | ✓ | ✓ | - |
+| **Dedicated Slack** | ✓ | - | - | - |
+| **Account Manager** | ✓ | ✓ | - | - |
+
+### Support Hours
+
+**Enterprise & Professional:**
+- 24/7/365 for Critical issues
+- 24/5 for High priority
+- Business hours for Medium/Low
+
+**Standard:**
+- Business hours (8 AM - 6 PM PST, Mon-Fri)
+- Emergency hotline for Critical issues
+
+**Starter:**
+- Email support only
+- Response within SLA timeframes
+
+### Escalation Process
+
+**Level 1:** Support Engineer  
+**Level 2:** Senior Engineer  
+**Level 3:** Engineering Manager  
+**Level 4:** VP of Engineering
+
+## Data Protection and Security
+
+### Data Backup
+
+- **Frequency:** Continuous backups
+- **Retention:** 30 days
+- **Recovery Time Objective (RTO):** 4 hours
+- **Recovery Point Objective (RPO):** 1 hour
+
+### Security Commitments
+
+- **Encryption:** TLS 1.3 in transit, AES-256 at rest
+- **Compliance:** SOC 2, ISO 27001, GDPR, HIPAA
+- **Audits:** Annual third-party security audits
+- **Penetration Testing:** Quarterly
+
+### Incident Response
+
+**Security Incident Response Times:**
+- Detection: < 15 minutes
+- Initial response: < 30 minutes
+- Customer notification: < 2 hours
+- Full report: Within 72 hours
+
+## Limitations and Exclusions
+
+This SLA does not apply to:
+
+### Excluded Circumstances
+
+- Force majeure events
+- Internet or network issues beyond our control
+- Third-party service failures
+- Customer's failure to follow documentation
+- Misuse or abuse of the Service
+- Beta or experimental features
+- Free trial accounts
+
+### Customer Responsibilities
+
+You must:
+- Use the Service in accordance with documentation
+- Maintain adequate internet connectivity
+- Implement recommended security practices
+- Respond to our requests for information
+- Pay fees on time
+
+## Changes to SLA
+
+We may modify this SLA with:
+- 30 days advance notice for material changes
+- Immediate effect for beneficial changes
+- Option to terminate if you disagree
+
+## Remedies
+
+Service credits are your **sole and exclusive remedy** for SLA breaches. We are not liable for:
+- Indirect or consequential damages
+- Lost profits or revenue
+- Data loss (beyond backup commitments)
+- Third-party claims
+
+## Contact Information
+
+**SLA Questions:**  
+Email: sla@articom.io  
+Phone: +1 (800) 123-4567
+
+**Report Outage:**  
+Email: support@articom.io  
+Phone: +1 (800) 123-4567 (24/7)  
+Status Page: https://status.articom.io
+
+**Enterprise Support:**  
+Dedicated Slack channel  
+Account manager direct line
+
+## Acknowledgment
+
+By using the Service, you acknowledge that you have read, understood, and agree to be bound by this SLA.
+
+---
+
+**Last Updated:** November 20, 2025  
+**Version:** 2.0

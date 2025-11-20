@@ -1,0 +1,192 @@
+---
+title: Authentication
+description: How to authenticate with the Articom API
+---
+
+# Authentication
+
+The Articom API uses API keys to authenticate requests. You can view and manage your API keys in the [Dashboard](https://dashboard.articom.io/api-keys).
+
+## API Keys
+
+Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, etc.
+
+### Getting Your API Key
+
+1. Log in to your [Articom Dashboard](https://dashboard.articom.io)
+2. Navigate to Settings → API Keys
+3. Click "Create New Key"
+4. Copy and securely store your API key
+
+## Authentication Methods
+
+### Bearer Token (Recommended)
+
+Include your API key in the Authorization header:
+
+```bash
+curl https://api.articom.io/v1/agents \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### API Key Header
+
+Alternatively, pass the API key in a custom header:
+
+```bash
+curl https://api.articom.io/v1/agents \
+  -H "X-API-Key: YOUR_API_KEY"
+```
+
+## Code Examples
+
+### JavaScript/TypeScript
+
+```javascript
+const articom = require('@articom/sdk');
+
+const client = new articom.Client({
+  apiKey: 'your_api_key_here'
+});
+
+// Make authenticated request
+const agents = await client.agents.list();
+```
+
+### Python
+
+```python
+import articom
+
+client = articom.Client(
+    api_key='your_api_key_here'
+)
+
+# Make authenticated request
+agents = client.agents.list()
+```
+
+### cURL
+
+```bash
+curl https://api.articom.io/v1/agents \
+  -H "Authorization: Bearer your_api_key_here" \
+  -H "Content-Type: application/json"
+```
+
+### Node.js (Fetch)
+
+```javascript
+const response = await fetch('https://api.articom.io/v1/agents', {
+  headers: {
+    'Authorization': 'Bearer your_api_key_here',
+    'Content-Type': 'application/json'
+  }
+});
+
+const data = await response.json();
+```
+
+## API Key Types
+
+### Production Keys
+- Used for live applications
+- Full access to production resources
+- Rate limits based on your plan
+
+### Test Keys
+- Used for development and testing
+- Access to test environment only
+- Separate rate limits
+- Prefixed with `test_`
+
+## Security Best Practices
+
+### 1. Keep Keys Secret
+Never expose API keys in:
+- Client-side code
+- Public repositories
+- Version control
+- Log files
+- Error messages
+
+### 2. Use Environment Variables
+
+```javascript
+// .env file
+ARTICOM_API_KEY=your_api_key_here
+
+// In your code
+const apiKey = process.env.ARTICOM_API_KEY;
+```
+
+### 3. Rotate Keys Regularly
+
+```bash
+# Rotate your API key periodically
+# 1. Create new key in dashboard
+# 2. Update applications
+# 3. Delete old key
+```
+
+### 4. Use Key Restrictions
+
+Restrict API keys by:
+- IP address
+- Referrer domains
+- Specific endpoints
+- Rate limits
+
+## Error Responses
+
+### 401 Unauthorized
+
+Missing or invalid API key:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "unauthorized",
+    "message": "Invalid API key provided"
+  }
+}
+```
+
+### 403 Forbidden
+
+Valid key but insufficient permissions:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "forbidden",
+    "message": "API key does not have required permissions"
+  }
+}
+```
+
+## OAuth 2.0 (Coming Soon)
+
+For applications requiring user-specific access, OAuth 2.0 will be available:
+
+```javascript
+// OAuth flow (coming soon)
+const authUrl = articom.oauth.getAuthorizationUrl({
+  clientId: 'your_client_id',
+  redirectUri: 'https://yourapp.com/callback',
+  scope: 'agents:read agents:write'
+});
+```
+
+## Rate Limiting
+
+Authenticated requests are subject to rate limiting based on your plan. See the [Rate Limits](/docs/api-reference/rate-limits) documentation for details.
+
+## Next Steps
+
+<Cards>
+  <Card title="Create Agent" href="/docs/api-reference/endpoint/create" />
+  <Card title="API Reference" href="/docs/api-reference/introduction" />
+</Cards>
