@@ -4,15 +4,12 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-# Copy necessary files for postinstall script
-COPY content ./content
-COPY source.config.ts ./source.config.ts
-COPY tsconfig.json ./tsconfig.json
 
+# Install dependencies without running postinstall scripts
 RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile --ignore-scripts; \
+  elif [ -f package-lock.json ]; then npm ci --ignore-scripts; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile --ignore-scripts; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -26,11 +23,11 @@ COPY . .
 # Disable Next.js telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build the application
+# Run postinstall script and build the application
 RUN \
-  if [ -f yarn.lock ]; then yarn build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
+  if [ -f yarn.lock ]; then yarn postinstall && yarn build; \
+  elif [ -f package-lock.json ]; then npm run postinstall && npm run build; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm postinstall && pnpm build; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
