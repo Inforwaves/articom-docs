@@ -1,20 +1,17 @@
-# Use the official Node 20 LTS image
-FROM node:20-slim
+# Use Node.js 20 as base image (required for Mintlify)
+FROM node:20-alpine
 
-
-# Install the Mintlify CLI globally
-RUN npm install -g mint
-
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy your documentation files into the container
-# Make sure to run this from the root of your docs project
-ADD . .
+# Install Mintlify CLI globally
+RUN npm install -g mintlify
 
-# Expose the port Mintlify uses for the dev server (if needed)
+# Copy the documentation files
+COPY . .
+
+# Expose the default Mintlify port
 EXPOSE 3000
 
-# Default command to run the dev server (can be overridden)
-# Try running this command in your Dockerfile CMD:
-CMD ["mint", "dev", "--host", "0.0.0.0"]
+# Start Mintlify dev server
+CMD ["mintlify", "dev"]

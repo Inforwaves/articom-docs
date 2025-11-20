@@ -8,3 +8,7 @@ node_modules
 README.md
 .vscode
 .idea
+k8s
+.github
+Dockerfile
+.dockerignore
