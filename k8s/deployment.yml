@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: articom-docs
+  namespace: docs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: articom-docs
+  template:
+    metadata:
+      labels:
+        app: articom-docs
+    spec:
+      containers:
+        - name: articom-docs
+          image: articomacr.azurecr.io/articom-docs:prod
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: articom-docs
+  namespace: docs
+spec:
+  selector:
+    app: articom-docs
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
