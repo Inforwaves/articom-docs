@@ -46,7 +46,7 @@ jobs:
         run: |
           echo "🔁 Triggering rollout restart for articom-docs in prod namespace..."
           az aks get-credentials --resource-group articom-production --name articom-aks-cluster --overwrite-existing
-          kubectl rollout restart deployment articom-docs -n prod
+          kubectl rollout restart deployment articom-docs -n docs
           echo "✅ Rollout restart triggered successfully"
 
   
