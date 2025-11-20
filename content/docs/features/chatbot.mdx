@@ -1,15 +1,51 @@
 ---
-title: Chatbot
-description: Build intelligent conversational AI chatbots
+title: AI Assistant
+description: Build and Manage your intelligent conversational AI Assistant
 ---
-
-# Chatbot
-
-Create sophisticated AI-powered chatbots that engage customers with natural, human-like conversations across multiple platforms.
 
 ## Overview
 
-Articom's chatbot platform enables you to build, deploy, and manage intelligent conversational agents that can handle customer inquiries, provide support, and drive engagement 24/7.
+Articom's chatbot platform provides you a flexible and intuitive environment for build, deploy, and manage intelligent assistants that automate conversations, support tasks, and deliver information 24/7. 
+
+You can build assistants with no coding, using AI to guide you, or through fully customizable configurations.
+
+When creating a new assistant, you will be presented with three options:
+
+* **Create from Scratch** 
+* **Easy Create & Customize** (Template-based) 
+* **Build with AI** 
+
+Each method suits different levels of experience and speed of deployment.
+
+### 3.1. Method 1: Creating a New Assistant from Scratch
+
+Choose this option if you want **full control** and want to configure the assistant manually.
+
+#### How it works
+
+1.  Click **Create from Scratch**.
+2.  Provide basic details:
+    * **Assistant Name** 
+    * **Role** (e.g., Support Agent, Sales Bot, Lead Assistant)
+3.  Select **Languages**.
+4.  Select the **AI modal** for your chatbot.
+5.  Define the assistant behavior in the description:
+    * **Tone and personality** 
+    * **Response style** (detailed, concise, friendly, formal) 
+6.  Attach data sources:
+    * Previously created **Knowledge Bases** 
+    * **Documents** 
+7.  Save and proceed to testing.
+
+### 3.2. Method 2: Easy Create & Customize (Template-Based)
+
+This option provides **ready-made templates** for common business needs, perfect for users who want a working assistant quickly. Each pre-built template comes with industry-specific knowledge and workflows that you can customize.
+
+![Template Selection Interface](/images/features/chatbot/chatbot-templates.png)
+
+### 3.3. Method 3: Build with AI
+
+This mode allows you to create a complete assistant **automatically** using your documents and knowledge.
 
 ## Key Features
 
@@ -167,81 +203,6 @@ const analytics = {
 };
 ```
 
-## Building Your First Chatbot
-
-### Step 1: Create Bot
-
-```javascript
-const bot = articom.createBot({
-  name: "Customer Support Bot",
-  language: "en",
-  personality: "friendly"
-});
-```
-
-### Step 2: Define Intents
-
-```javascript
-bot.addIntent({
-  name: "greeting",
-  examples: [
-    "hello",
-    "hi",
-    "hey there",
-    "good morning"
-  ],
-  response: "Hello! How can I assist you today?"
-});
-```
-
-### Step 3: Add Actions
-
-```javascript
-bot.addAction({
-  name: "search_products",
-  handler: async (query) => {
-    const results = await searchProducts(query);
-    return formatProductResults(results);
-  }
-});
-```
-
-### Step 4: Deploy
-
-```javascript
-bot.deploy({
-  channels: ["web", "whatsapp"],
-  environment: "production"
-});
-```
-
-## Best Practices
-
-### 1. Clear Communication
-- Use simple, conversational language
-- Provide clear options and buttons
-- Set expectations for response times
-
-### 2. Error Handling
-```javascript
-bot.onUnknownIntent((message) => {
-  return {
-    text: "I'm not sure I understand. Could you rephrase that?",
-    suggestions: ["Contact Support", "View FAQ"]
-  };
-});
-```
-
-### 3. Seamless Handoff
-```javascript
-if (requiresHumanAgent) {
-  bot.escalate({
-    reason: "complex_inquiry",
-    context: conversationHistory,
-    priority: "high"
-  });
-}
-```
 
 ### 4. Privacy & Security
 - Encrypt sensitive data
