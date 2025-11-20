@@ -14,4 +14,5 @@ ADD . .
 EXPOSE 3000
 
 # Default command to run the dev server (can be overridden)
-CMD ["mint", "dev"]
+# Try running this command in your Dockerfile CMD:
+CMD ["mint", "dev", "--host", "0.0.0.0"]
