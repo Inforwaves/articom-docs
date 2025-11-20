@@ -1,17 +1,17 @@
-# Use Node.js 20 as base image
-FROM node:20-alpine
+FROM node:current-slim
 
-# Set working directory
+# Install the Mintlify CLI globally
+RUN npm install -g mint
+
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install Mintlify CLI globally
-RUN npm install -g mintlify
+# Copy your documentation files into the container
+# Make sure to run this from the root of your docs project
+ADD . .
 
-# Copy all documentation files
-COPY . .
-
-# Expose port 3000 (default Mintlify port)
+# Expose the port Mintlify uses for the dev server (if needed)
 EXPOSE 3000
 
-# Start the Mintlify server
-CMD ["mintlify", "dev", "--host", "0.0.0.0"]
+# Default command to run the dev server (can be overridden)
+CMD ["mint", "dev"]
