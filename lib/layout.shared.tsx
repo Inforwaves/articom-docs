@@ -8,14 +8,14 @@ export function baseOptions(): BaseLayoutProps {
       title: (
         <span className="flex items-center gap-2 font-bold">
           <Image 
-            src="/articom.png" 
+            src="/darkArticom.svg" 
             alt="Articom AI" 
             width={120} 
             height={32}
             className="dark:hidden"
           />
           <Image 
-            src="/articom.png" 
+            src="/lightArticom.svg" 
             alt="Articom AI" 
             width={120} 
             height={32}
