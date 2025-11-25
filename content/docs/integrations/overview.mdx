@@ -36,11 +36,11 @@ Connect with your existing business tools:
 ## Integration Categories
 
 <Cards>
-  <Card title="WhatsApp" href="/docs/integrations/whatsapp" />
-  <Card title="Messenger" href="/docs/integrations/messenger" />
-  <Card title="Instagram" href="/docs/integrations/instagram" />
-  <Card title="Slack" href="/docs/integrations/slack" />
-  <Card title="CRM" href="/docs/integrations/crm" />
+  <Card title="WhatsApp" href="/integrations/whatsapp" />
+  <Card title="Messenger" href="/integrations/messenger" />
+  <Card title="Instagram" href="/integrations/instagram" />
+  <Card title="Slack" href="/integrations/slack" />
+  <Card title="CRM" href="/integrations/crm" />
 </Cards>
 
 ## Quick Start
@@ -49,168 +49,22 @@ Connect with your existing business tools:
 Select the platform you want to integrate with from the integrations marketplace.
 
 ### 2. Authenticate
-Connect your account using OAuth or API keys:
-
-```javascript
-const integration = await articom.connect({
-  platform: "whatsapp",
-  credentials: {
-    phoneNumberId: "YOUR_PHONE_NUMBER_ID",
-    accessToken: "YOUR_ACCESS_TOKEN"
-  }
-});
-```
+Connect your account using OAuth or API keys
 
 ### 3. Configure
-Set up integration settings and permissions:
-
-```javascript
-integration.configure({
-  autoSync: true,
-  syncInterval: "15 minutes",
-  dataMapping: {
-    contact_name: "customer.name",
-    contact_email: "customer.email"
-  }
-});
-```
+Set up integration settings and permissions
 
 ### 4. Test & Deploy
 Test the integration and deploy to production.
 
-## Integration Features
-
-### Real-time Sync
-Keep data synchronized across all platforms in real-time.
-
-### Bi-directional Data Flow
-Data flows seamlessly between Articom and integrated platforms.
-
-### Custom Mapping
-Map fields between systems to match your data structure.
-
-### Webhook Support
-Receive real-time notifications for events.
-
-### Bulk Operations
-Perform bulk imports, exports, and updates.
-
-## API Integration
-
-### RESTful API
-```javascript
-// Example API call
-const response = await fetch('https://api.articom.io/v1/agents', {
-  method: 'GET',
-  headers: {
-    'Authorization': 'Bearer YOUR_API_KEY',
-    'Content-Type': 'application/json'
-  }
-});
-```
-
-### Webhooks
-```javascript
-// Configure webhook
-const webhook = await articom.webhooks.create({
-  url: 'https://yourapp.com/webhook',
-  events: ['conversation.started', 'message.received'],
-  secret: 'your_webhook_secret'
-});
-```
-
-### SDKs
-Official SDKs available for:
-- JavaScript/TypeScript
-- Python
-- Ruby
-- PHP
-- Go
-
-## Enterprise Integrations
-
-### Custom Integrations
-Build custom integrations using our API:
-
-```javascript
-const customIntegration = {
-  name: "Internal CRM",
-  apiEndpoint: "https://internal-crm.company.com/api",
-  authentication: "oauth2",
-  mappings: [
-    { source: "articom.customer", target: "crm.contact" },
-    { source: "articom.conversation", target: "crm.activity" }
-  ]
-};
-```
-
-### SSO Integration
-Single Sign-On with SAML 2.0 and OAuth 2.0.
-
-### Data Warehouse
-Export data to your data warehouse:
-- Google BigQuery
-- Amazon Redshift
-- Snowflake
-- Azure Synapse
-
-## Security
-
-### Data Encryption
-All data transmitted between systems is encrypted using TLS 1.3.
-
-### Access Control
-Fine-grained permissions and role-based access control.
-
-### Compliance
-Integrations maintain compliance with GDPR, HIPAA, and SOC 2.
-
-## Integration Monitoring
-
-### Health Checks
-Monitor integration status and performance:
-
-```javascript
-const health = await integration.checkHealth();
-console.log({
-  status: health.status, // "healthy"
-  lastSync: health.lastSync,
-  errorRate: health.errorRate
-});
-```
-
-### Error Logs
-Track and resolve integration errors:
-
-```javascript
-const errors = await integration.getLogs({
-  level: "error",
-  limit: 50
-});
-```
-
-## Best Practices
-
-1. **Test in Sandbox**: Always test integrations in a sandbox environment first
-2. **Monitor Performance**: Set up alerts for integration failures
-3. **Data Validation**: Validate data before syncing
-4. **Rate Limiting**: Respect API rate limits
-5. **Error Handling**: Implement robust error handling and retries
-
-## Support
-
-Need help with integrations?
-- **Documentation**: Detailed guides for each integration
-- **Support Team**: Contact support@articom.io
-- **Community**: Join our community forum
-- **Professional Services**: Custom integration development
 
 ## Next Steps
 
 Explore specific integration guides to get started with your preferred platforms.
 
 <Cards>
-  <Card title="API Documentation" href="/docs/api-reference" />
-  <Card title="Webhooks Guide" href="/docs/api-reference/endpoint/webhook" />
-  <Card title="Authentication" href="/docs/api-reference/authentication" />
+  <Card title="Analytics" href="/features/analytics" />
+  <Card title="API Documentation" href="/api-reference/overview" />
+  <Card title="Webhooks Guide" href="/api-reference/endpoint/webhook" />
+  <Card title="Authentication" href="/api-reference/authentication" />
 </Cards>
