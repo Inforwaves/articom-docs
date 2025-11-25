@@ -1,255 +1,63 @@
 ---
-title: Chatbot
-description: Build intelligent conversational AI chatbots
+title: AI Assistant
+description: Build and Manage your intelligent conversational AI Assistant
 ---
-
-# Chatbot
-
-Create sophisticated AI-powered chatbots that engage customers with natural, human-like conversations across multiple platforms.
-
 ## Overview
 
-Articom's chatbot platform enables you to build, deploy, and manage intelligent conversational agents that can handle customer inquiries, provide support, and drive engagement 24/7.
+Articom platform provides you a flexible and intuitive environment for build, deploy, and manage intelligent assistants that automate conversations, support tasks, and deliver information 24/7. 
 
-## Key Features
+You can build assistants instantly, using AI to guide you, or through fully customizable configurations.
 
-### Natural Language Understanding
-- **Intent Recognition**: Accurately identify user intentions
-- **Entity Extraction**: Extract relevant information from messages
-- **Context Awareness**: Maintain conversation context across interactions
-- **Sentiment Analysis**: Detect user emotions and adjust responses
+## Get started
 
-### Conversation Design
+When creating a new assistant, you will be presented with three options:
 
-#### Visual Flow Builder
-Design conversation flows with an intuitive drag-and-drop interface:
+* **Create from Scratch** 
+* **Easy Create & Customize** (Template-based) 
+* **Build with AI** 
 
-```javascript
-const conversationFlow = {
-  greeting: {
-    message: "Hello! How can I help you today?",
-    options: ["Product Info", "Support", "Billing"]
-  },
-  productInfo: {
-    trigger: "Product Info",
-    message: "What would you like to know about our products?",
-    actions: ["search_products", "show_catalog"]
-  }
-};
-```
+Each method suits different levels of experience and speed of deployment.
 
-#### Response Templates
-Create reusable response templates with variables:
+### 3.1. Method 1: Creating a New Assistant from Scratch
 
-```javascript
-const templates = {
-  orderStatus: "Your order #{orderId} is {status}. Expected delivery: {date}",
-  greeting: "Hi {userName}! Welcome back!",
-  support: "I'll connect you with our {department} team."
-};
-```
+Choose this option if you want **full control** and want to configure the assistant manually.
 
-### Multi-channel Deployment
+![Create Assistant Interface](/images/features/assistant/chatbot-createNew.png)
 
-Deploy your chatbot across multiple platforms:
+#### How it works
 
-- **Web Chat**: Embed on your website
-- **Mobile Apps**: iOS and Android SDK
-- **WhatsApp**: WhatsApp Business API
-- **Facebook Messenger**: Messenger integration
-- **Slack**: Workspace integration
-- **Instagram**: DM automation
+1.  Click **Create from Scratch**.
+2.  Provide basic details:
+    * **Assistant Name** 
+    * **Role** (e.g., Support Agent, Sales Bot, Lead Assistant)
+3.  Select **Languages**.
+4.  Select the **AI modal** for your chatbot.
+5.  Define the assistant behavior in the description:
+    * **Tone and personality** 
+    * **Response style** (detailed, concise, friendly, formal) 
+6.  Attach data sources:
+    * Previously created **Knowledge Bases** 
+    * **Documents** 
+7.  Save and proceed to testing.
 
-### Personalization
+### 3.2. Method 2: Easy Create & Customize (Template-Based)
 
-#### User Profiles
-Track and utilize user information:
+This option provides **ready-made templates** for common business needs, perfect for users who want a working assistant quickly. Each pre-built template comes with industry-specific knowledge and workflows that you can customize.
 
-```javascript
-const userProfile = {
-  name: "John Doe",
-  preferences: {
-    language: "en",
-    notifications: true
-  },
-  history: {
-    lastVisit: "2025-11-20",
-    totalInteractions: 15
-  }
-};
-```
+![Template Selection Interface](/images/features/assistant/chatbot-templates.png)
 
-#### Dynamic Content
-Personalize responses based on user data:
+### 3.3. Method 3: Build with AI
 
-```javascript
-if (user.isReturning) {
-  response = `Welcome back, ${user.name}!`;
-} else {
-  response = "Welcome! I'm here to help you get started.";
-}
-```
+This mode allows you to create a complete assistant with help of AI. You can create fully customized AI assistant according to your preferences.
 
-## Advanced Capabilities
+![Build Assistant with AI Interface](/images/features/assistant/chatbot-withAI.png)
 
-### AI Training
 
-#### Custom Training Data
-Train your chatbot with your specific content:
+After successful creation, you can see **your AI Assistant** visible in **Your Assistant Section**. Click on it to manage and view services available for your Assistant.
 
-```json
-{
-  "training_data": [
-    {
-      "intent": "product_inquiry",
-      "examples": [
-        "Tell me about your products",
-        "What do you sell?",
-        "Show me your catalog"
-      ],
-      "response": "We offer a wide range of products..."
-    }
-  ]
-}
-```
+![View your Assistants](/images/features/assistant/own-assistants.png)
 
-#### Continuous Learning
-Chatbots improve over time by learning from interactions:
-
-- Track unhandled queries
-- Analyze conversation success rates
-- Update training data based on feedback
-- A/B test different response strategies
-
-### Integration Capabilities
-
-#### API Integration
-Connect to external services:
-
-```javascript
-// Fetch real-time data
-const getOrderStatus = async (orderId) => {
-  const response = await fetch(`/api/orders/${orderId}`);
-  return response.json();
-};
-
-// Use in chatbot response
-const orderInfo = await getOrderStatus(user.orderId);
-chatbot.reply(`Your order status: ${orderInfo.status}`);
-```
-
-#### Database Connectivity
-Query your database for information:
-
-```javascript
-const getUserData = async (userId) => {
-  return await db.users.findOne({ id: userId });
-};
-```
-
-### Analytics & Insights
-
-Track chatbot performance:
-
-```javascript
-const analytics = {
-  metrics: {
-    totalConversations: 5420,
-    avgResponseTime: 0.8, // seconds
-    resolutionRate: 0.85,
-    userSatisfaction: 4.6
-  },
-  topIntents: [
-    "product_inquiry",
-    "order_status",
-    "technical_support"
-  ]
-};
-```
-
-## Building Your First Chatbot
-
-### Step 1: Create Bot
-
-```javascript
-const bot = articom.createBot({
-  name: "Customer Support Bot",
-  language: "en",
-  personality: "friendly"
-});
-```
-
-### Step 2: Define Intents
-
-```javascript
-bot.addIntent({
-  name: "greeting",
-  examples: [
-    "hello",
-    "hi",
-    "hey there",
-    "good morning"
-  ],
-  response: "Hello! How can I assist you today?"
-});
-```
-
-### Step 3: Add Actions
-
-```javascript
-bot.addAction({
-  name: "search_products",
-  handler: async (query) => {
-    const results = await searchProducts(query);
-    return formatProductResults(results);
-  }
-});
-```
-
-### Step 4: Deploy
-
-```javascript
-bot.deploy({
-  channels: ["web", "whatsapp"],
-  environment: "production"
-});
-```
-
-## Best Practices
-
-### 1. Clear Communication
-- Use simple, conversational language
-- Provide clear options and buttons
-- Set expectations for response times
-
-### 2. Error Handling
-```javascript
-bot.onUnknownIntent((message) => {
-  return {
-    text: "I'm not sure I understand. Could you rephrase that?",
-    suggestions: ["Contact Support", "View FAQ"]
-  };
-});
-```
-
-### 3. Seamless Handoff
-```javascript
-if (requiresHumanAgent) {
-  bot.escalate({
-    reason: "complex_inquiry",
-    context: conversationHistory,
-    priority: "high"
-  });
-}
-```
-
-### 4. Privacy & Security
-- Encrypt sensitive data
-- Comply with data regulations
-- Implement authentication when needed
-- Clear data retention policies
-
-## Use Cases
+## Use Cases of AI Assistant
 
 ### Customer Support
 Handle common inquiries, troubleshoot issues, and escalate complex problems.
@@ -266,32 +74,12 @@ Schedule meetings, appointments, and reservations automatically.
 ### FAQ Automation
 Provide instant answers to frequently asked questions.
 
-## Configuration Options
-
-```javascript
-const botConfig = {
-  name: "Support Bot",
-  language: "en",
-  fallbackLanguage: "en",
-  timeout: 300, // seconds
-  maxTurns: 50,
-  features: {
-    typing_indicator: true,
-    read_receipts: true,
-    quick_replies: true,
-    rich_media: true
-  },
-  nlp: {
-    confidence_threshold: 0.7,
-    max_alternatives: 3
-  }
-};
-```
 
 ## Next Steps
 
 <Cards>
-  <Card title="Voice Agents" href="/docs/features/voice-agents" />
-  <Card title="Automation" href="/docs/features/automation" />
-  <Card title="Analytics" href="/docs/features/analytics" />
+  <Card title="Analytics" href="/features/analytics" />
+  <Card title="Manage Assistant" href="/features/manage-assistant" />
+  <Card title="Knowledge Base" href="/features/knowledge-base" />
+  <Card title="See All Features" href="/features/overview" />
 </Cards>
