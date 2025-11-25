@@ -11,13 +11,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Articom AI - Intelligent Conversational Experiences',
-    template: '%s | Articom AI',
+    default: 'Articom - Intelligent Conversational Experiences',
+    template: '%s | Articom',
   },
   description: 'Build intelligent conversational experiences with AI-powered agents and automation. Connect with customers across WhatsApp, Instagram, Slack, and more.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL ?? 'https://docs.articom.ai'),
   openGraph: {
-    title: 'Articom AI Documentation',
+    title: 'Articom Documentation',
     description: 'Build intelligent conversational experiences with AI-powered agents',
     type: 'website',
   },
