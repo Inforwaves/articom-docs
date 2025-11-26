@@ -1,11 +1,22 @@
 import { source } from '@/lib/source';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { baseOptions } from '@/lib/layout.shared';
+import type { ReactNode } from 'react';
 
-export default function Layout({ children }: LayoutProps<'/'>) {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const filteredTree = {
+  ...source.pageTree,
+  children: source.pageTree.children.filter(
+    (item) => item.type !== 'folder' || item.name !== 'Legal',
+  ),
+};
+export default function Layout({ children }: LayoutProps) {
   return (
     <DocsLayout 
-      tree={source.pageTree} 
+      tree={filteredTree} 
       {...baseOptions()}
       sidebar={{
         defaultOpenLevel: 0,
