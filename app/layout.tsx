@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Articom AI Documentation',
+    title: 'Articom Documentation',
     description: 'Build intelligent conversational experiences with AI-powered agents',
   },
 };
