@@ -1,140 +1,104 @@
 ---
-title: API Introduction
-description: Getting started with the Articom API documentation.
+title: Articom Skills SDK (Python)
+description: Getting started with the Articom SDK.
 ---
 
-## Overview
+## Overview 
 
-The Articom API is organized around REST principles. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+This SDK provides the tools to build, test, and serve custom skills for the Articom Agentic Marketplace Platform. It allows developers to create skills that can be self-hosted and made observable to the Articom server.
 
-## Base URL
+## Features
 
-```
-https://api.articom.io/v1
-```
+-   **Declarative Syntax:** Use simple Python decorators to define skills and their tools.
+    
+-   **Automatic Schema Generation:** Pydantic models are used for inputs and outputs, which automatically generate the `skill.json` manifest.
+    
+-   **Built-in Security:** Automatic HMAC signature verification for all incoming requests from the Articom server.
+    
+-   **Integrated Web Server:** A simple CLI to run a production-ready web server (FastAPI + Uvicorn).
+    
 
-## API Endpoints
-
-The API provides the following main endpoints:
-
-- **Authentication** - Manage API keys and tokens
-- **Agents** - Create and manage AI agents
-- **Conversations** - Handle chat interactions
-- **Analytics** - Access usage and performance metrics
-
-## Quick Start
-
-### 1. Get Your API Key
-
-Sign up for an account and generate an API key from the dashboard:
-
-```bash
-https://dashboard.articom.io/api-keys
-```
-
-### 2. Make Your First Request
-
-```bash
-curl https://api.articom.io/v1/agents \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### 3. Create an Agent
-
-```bash
-curl https://api.articom.io/v1/agents \
-  -X POST \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Customer Support Agent",
-    "type": "support",
-    "configuration": {
-      "language": "en",
-      "personality": "helpful"
-    }
-  }'
-```
-
-## Response Format
-
-All API responses are returned in JSON format:
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": "agent_123",
-    "name": "Customer Support Agent",
-    "status": "active"
-  },
-  "meta": {
-    "timestamp": "2025-11-20T10:00:00Z"
-  }
-}
-```
-
-## Error Handling
-
-The API uses conventional HTTP response codes:
-
-- `200` - Success
-- `400` - Bad Request
-- `401` - Unauthorized
-- `403` - Forbidden
-- `404` - Not Found
-- `429` - Too Many Requests
-- `500` - Internal Server Error
-
-Error response format:
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": "invalid_request",
-    "message": "The request was invalid",
-    "details": {}
-  }
-}
-```
-
-## Rate Limiting
-
-API requests are rate limited based on your plan:
-
-- **Free**: 100 requests/hour
-- **Pro**: 1,000 requests/hour
-- **Enterprise**: Custom limits
-
-Rate limit headers:
+## Installation
 
 ```
-X-RateLimit-Limit: 1000
-X-RateLimit-Remaining: 999
-X-RateLimit-Reset: 1605398400
+pip install articom-sdk
 ```
 
-## SDKs and Libraries
+## Quickstart
 
-Official SDKs available:
+**1. Create your skill file (e.g., `main.py`):**
 
-- **JavaScript/TypeScript** - `npm install @articom/sdk`
-- **Python** - `pip install articom`
-- **Go** - `go get github.com/articom/articom-go`
-- **Ruby** - `gem install articom`
+```
+from pydantic import BaseModel
+from articom_sdk import ArticomSkill, Tool
 
-## Support
+# Define the skill using a decorator
+@ArticomSkill(
+    name="SupportDeskConnector",
+    version="1.0.0",
+    author="My Company",
+    description="A skill to connect to a generic support desk."
+)
+class MySkill:
 
-- Documentation: https://docs.articom.io
-- API Status: https://status.articom.io
-- Support: support@articom.io
-- Community: https://community.articom.io
+    # Define the input data model for a tool
+    class CreateTicketInput(BaseModel):
+        customer_email: str
+        subject: str
+        priority: str
+
+    # Define the output data model
+    class CreateTicketOutput(BaseModel):
+        ticket_id: str
+        status: str
+
+    # Define a tool using a decorator
+    @Tool(
+        name="create_customer_ticket",
+        description="Creates a new support ticket for a customer."
+    )
+    def create_ticket(self, data: CreateTicketInput) -> CreateTicketOutput:
+        """
+        This is where your core logic goes.
+        Make an API call to your actual support desk system here.
+        """
+        print(f"Creating ticket for {data.customer_email} with subject '{data.subject}'")
+        new_ticket_id = "TICKET-12345"
+        return self.CreateTicketOutput(ticket_id=new_ticket_id, status="open")
+
+
+```
+
+**2. Create a `.env` file for your signing secret:**
+
+```
+# .env
+ARTICOM_SIGNING_SECRET=your_super_secret_string_from_articom_portal
+```
+
+**3. Run your skill server:**
+
+The SDK provides a command-line tool. You just need to point it to your skill file and the class name.
+
+```
+poetry run articom serve main:MySkill --port 8000
+```
+
+Your skill is now running and ready to be registered with Articom!
+
+**4. Generate the Manifest:**
+
+You can also generate the `skill.json` manifest without running the server. This is useful for CI/CD or validation.
+
+```
+poetry run articom generate-manifest main:MySkill
+```
+
+This will print the JSON manifest to the console.
 
 ## Next Steps
 
 <Cards>
-  <Card title="Authentication" href="/api-reference/authentication" />
+  <Card title="Articom Overview" href="/" />
   <Card title="Our Features" href="/features/overview" />
 </Cards>
