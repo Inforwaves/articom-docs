@@ -13,6 +13,7 @@ const filteredTree = {
     (item) => item.type !== 'folder' || item.name !== 'Legal',
   ),
 };
+
 export default function Layout({ children }: LayoutProps) {
   return (
     <DocsLayout 
