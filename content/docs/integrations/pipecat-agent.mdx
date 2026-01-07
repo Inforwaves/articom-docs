@@ -1,6 +1,6 @@
-```md
 # SIP Trunk Interconnection – Technical Handover Document
 
+**Customer:** Articom / Pipecat Voice Platform  
 **Deployment Environment:** Microsoft Azure (AKS)  
 **Connection Type:** Site-to-Site IPsec VPN (IKEv2)  
 **Use Case:** AI-powered voice call handling (server-side SIP)
@@ -30,8 +30,6 @@ Key characteristics:
 
 ## 3. High-Level Architecture
 
-```
-
 SIP Provider Network
 |
 IPsec VPN (IKEv2)
@@ -45,7 +43,6 @@ AKS Ingress
 Pipecat Voice Agent
 (SIP + RTP termination)
 
-```
 
 All signaling and media traffic remains inside private networks.
 
@@ -142,11 +139,8 @@ To complete VPN provisioning, the following details are required:
 
 A configurable RTP port range will be allocated, for example:
 
-```
-
 UDP 20000–40000
 
-```
 
 Exact values will be confirmed during provisioning.
 
@@ -226,7 +220,7 @@ During onboarding, the following steps will be coordinated:
 
 1. Exchange network and VPN parameters
 2. Bring up IPsec tunnel
-3. Validate SIP registration / trunk connectivity
+3. Validate SIP trunk connectivity
 4. Execute test calls (signaling + media)
 5. Move to production traffic
 
@@ -239,6 +233,3 @@ A staging environment can be provided if required.
 For provisioning, testing, or operational coordination, a dedicated technical contact will be assigned during onboarding.
 
 ---
-
-**End of Document**
-```
