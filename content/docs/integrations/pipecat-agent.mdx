@@ -1,0 +1,244 @@
+```md
+# SIP Trunk Interconnection – Technical Handover Document
+
+**Deployment Environment:** Microsoft Azure (AKS)  
+**Connection Type:** Site-to-Site IPsec VPN (IKEv2)  
+**Use Case:** AI-powered voice call handling (server-side SIP)
+
+---
+
+## 1. Purpose of This Document
+
+This document defines the technical requirements, network configuration, and operational expectations for establishing a **secure SIP trunk connection** between the SIP Trunking Provider and the **Pipecat Voice Agent Platform**.
+
+It is intended as a **handover and onboarding reference** for network and voice engineering teams on the provider side.
+
+---
+
+## 2. Solution Overview
+
+The Pipecat Voice Platform terminates both **SIP signaling and RTP media server-side** within a private Azure environment.
+
+Key characteristics:
+
+- SIP and RTP are transported via a **private IPsec VPN tunnel**
+- No public SIP exposure
+- No WebRTC, ICE, or TURN servers involved
+- Designed for high-throughput, low-latency AI call handling
+
+---
+
+## 3. High-Level Architecture
+
+```
+
+SIP Provider Network
+|
+IPsec VPN (IKEv2)
+|
+Azure VPN Gateway
+|
+Azure Virtual Network
+|
+AKS Ingress
+|
+Pipecat Voice Agent
+(SIP + RTP termination)
+
+```
+
+All signaling and media traffic remains inside private networks.
+
+---
+
+## 4. VPN Configuration (Mandatory)
+
+### 4.1 VPN Type
+
+| Item | Value |
+|----|-----|
+| VPN Type | Site-to-Site |
+| Routing | Route-based |
+| IKE Version | IKEv2 |
+
+---
+
+### 4.2 IPsec / IKE Security Parameters
+
+The following parameters must be supported and configured on the provider side:
+
+| Parameter | Value |
+|--------|------|
+| IKE Encryption | AES-256 |
+| IKE Integrity | SHA-256 |
+| Diffie-Hellman Group | DH Group 14 |
+| IPsec Encryption | AES-256 |
+| IPsec Integrity | SHA-256 |
+| Perfect Forward Secrecy | PFS Group 14 |
+| Security Association Lifetime | 3600 seconds |
+
+> **Note:** Weak or legacy ciphers (AES128, SHA1, DH2/DH5) are not permitted.
+
+---
+
+### 4.3 Information Required From SIP Provider
+
+To complete VPN provisioning, the following details are required:
+
+- VPN gateway **public IP address**
+- Internal **SIP/RTP CIDR ranges**
+- Preferred **Pre-Shared Key (PSK)**
+- Supported RTP port range (if fixed)
+
+---
+
+## 5. SIP Signaling Configuration
+
+### 5.1 Transport
+
+| Item | Value |
+|---|---|
+| Primary Transport | SIP over WebSocket (WSS) |
+| Alternative | SIP over TCP |
+| SIP TLS | Supported |
+
+> SIP over UDP is supported only if explicitly required.
+
+---
+
+### 5.2 SIP Trunk Characteristics
+
+| Parameter | Value |
+|--------|------|
+| SIP Port | 5061 (TLS) or WSS endpoint |
+| Registration | Static trunk (no REGISTER) |
+| Authentication | IP-based (VPN-scoped) |
+| SIP Domain | Provided during onboarding |
+
+---
+
+## 6. Media (RTP) Configuration
+
+### 6.1 Media Handling Model
+
+- RTP media is **terminated directly by Pipecat**
+- No media relay services (TURN) are used
+- Media remains inside the IPsec tunnel
+
+---
+
+### 6.2 RTP Transport Details
+
+| Item | Value |
+|----|----|
+| Protocol | RTP / SRTP |
+| Transport | UDP |
+| Direction | Bidirectional |
+| NAT Traversal | Not required |
+
+---
+
+### 6.3 RTP Port Range
+
+A configurable RTP port range will be allocated, for example:
+
+```
+
+UDP 20000–40000
+
+```
+
+Exact values will be confirmed during provisioning.
+
+---
+
+## 7. Network & Firewall Requirements
+
+### 7.1 SIP Provider Requirements
+
+Allow outbound traffic to:
+
+- Azure VPN Gateway public IP
+- SIP signaling ports (TLS/WSS)
+- RTP UDP port range
+
+---
+
+### 7.2 Azure-Side Controls
+
+- SIP traffic allowed **only from VPN CIDRs**
+- Network Security Groups enforce SIP/RTP rules
+- Web Application Firewall protects signaling endpoints
+- No public SIP exposure
+
+---
+
+## 8. Call Flow Summary
+
+### 8.1 Incoming Call Flow
+
+1. SIP Provider sends `INVITE` over IPsec VPN
+2. SIP signaling reaches AKS Ingress
+3. Pipecat Voice Agent accepts and negotiates media
+4. RTP flows directly over IPsec
+5. Audio is processed by AI agent
+
+---
+
+### 8.2 Media Processing
+
+- Audio streamed into AI pipeline
+- Real-time responses generated
+- RTP audio returned to SIP provider
+
+---
+
+## 9. Reliability & Scaling
+
+- Pipecat runs as stateless Kubernetes pods
+- Horizontal scaling supported
+- Call/session state managed via internal Redis
+- No dependency on client-side state
+
+---
+
+## 10. Monitoring & Troubleshooting
+
+- SIP signaling logs available on request
+- RTP metrics: packet loss, jitter, latency
+- VPN tunnel health monitored continuously
+- Maintenance windows communicated in advance
+
+---
+
+## 11. Security Considerations
+
+- All traffic encrypted via IPsec
+- No public SIP endpoints
+- IP whitelisting enforced
+- Credentials never transmitted via SIP headers
+
+---
+
+## 12. Onboarding & Testing
+
+During onboarding, the following steps will be coordinated:
+
+1. Exchange network and VPN parameters
+2. Bring up IPsec tunnel
+3. Validate SIP registration / trunk connectivity
+4. Execute test calls (signaling + media)
+5. Move to production traffic
+
+A staging environment can be provided if required.
+
+---
+
+## 13. Contact & Coordination
+
+For provisioning, testing, or operational coordination, a dedicated technical contact will be assigned during onboarding.
+
+---
+
+**End of Document**
+```
